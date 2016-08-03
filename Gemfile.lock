@@ -113,7 +113,7 @@ GEM
     mime-types-data (3.2016.0521)
     mini_portile2 (2.1.0)
     minitest (5.9.0)
-    mysql2 (0.4.4)
+    mysql2 (0.3.21)
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
@@ -202,7 +202,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   activeadmin!
-  mysql2
+  mysql2 (~> 0.3.18)
   omniauth
   omniauth-linkedin
   rails (= 4.2.1)

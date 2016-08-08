@@ -6,14 +6,13 @@ class Users::UsersController < ApplicationController
     @user.destroy
     if @user.errors.empty?
       render json: {
-                      :success => true,
-                      :info => "User Deleted",
-                      :user => @user.to_json
+                      success: true,
+                      response: @user.to_json
                     }
     else
       render json: {
-                      :success => false,
-                      :errors => @user.errors.to_json
+                      success: false,
+                      info: @user.errors.to_json
                     }
     end
   end

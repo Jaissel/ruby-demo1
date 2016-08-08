@@ -1,11 +1,11 @@
 class Users::SessionsController < Devise::SessionsController
   respond_to :json
-  
+
 	def destroy
     signed_out = (Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name))
-    render json:  {
-                    :success => true,
-                    :info => "Logged out",
+    render json: {
+                    success: true,
+                    info: "Logged out",
                   }
 	end
 

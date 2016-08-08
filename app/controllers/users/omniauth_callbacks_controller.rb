@@ -6,14 +6,14 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if @user.persisted?
       sign_in(resource_name, resource)
       render json: {
-                      :success => true,
-                      :user => @user
+                      success: true,
+                      response: @user
                     }
     else
       session["devise.linkedin"] = request.env["omniauth.auth"]
       render json: {
-                      :success => false,
-                      :info => @user.errors
+                      success: false,
+                      info: @user.errors
                     }
     end
   end

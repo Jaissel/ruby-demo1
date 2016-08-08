@@ -2,13 +2,16 @@ source 'https://rubygems.org'
 
 
 gem 'rails', '4.2.1'
-#gem 'rails', '~> 4.2.4', git: "git://github.com/rails/rails.git", branch: '4-2-stable'
-gem 'rails-api'
+gem 'rails-api', require: 'rails-api/action_controller/api'
 gem 'active_model_serializers'
 gem 'mysql2', '~> 0.3.18'
 gem 'activeadmin', github: 'activeadmin'
+gem 'multi_json'
+gem 'simple_token_authentication', '~> 1.0'
+gem 'devise'
 gem 'omniauth'
 gem 'omniauth-linkedin'
+gem "figaro"
 
 group :development, :test do
   gem 'spring'

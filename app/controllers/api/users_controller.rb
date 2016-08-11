@@ -1,6 +1,20 @@
-class Users::UsersController < ApplicationController
-  before_action :set_user, only: [:destroy]
+class Api::UsersController < ApplicationController
+  before_action :set_user, only: [:destroy, :show]
   respond_to :json
+
+  def show
+    if !@user.nil?
+      render json: {
+                      success: true,
+                      response: @user.to_json
+                    }
+    else
+      render json: {
+                      success: false,
+                      info: "The user doesn't exist."
+                    }
+    end
+  end
 
   def destroy
     @user.destroy

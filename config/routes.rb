@@ -3,4 +3,8 @@ Rails.application.routes.draw do
     get '/logout' => 'users/sessions#destroy', :as => :destroy_user_session
     get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
   end
+
+  namespace :api do
+    resources :users, only: [:show]
+  end
 end

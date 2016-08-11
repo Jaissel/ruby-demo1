@@ -11,76 +11,103 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160808033313) do
+ActiveRecord::Schema.define(version: 20160811031435) do
 
-  create_table "area_users", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4, null: false
-    t.integer  "area_id",    limit: 4, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "areas", force: :cascade do |t|
-    t.string   "name",       limit: 255, null: false
+    t.string   "name",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "event_users", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4, null: false
-    t.integer  "event_id",   limit: 4, null: false
-    t.boolean  "status",     limit: 1, null: false
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.boolean  "status",     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "event_users", ["event_id"], name: "index_event_users_on_event_id", using: :btree
+  add_index "event_users", ["user_id"], name: "index_event_users_on_user_id", using: :btree
+
   create_table "events", force: :cascade do |t|
-    t.string   "name",        limit: 255, null: false
-    t.string   "description", limit: 255, null: false
-    t.datetime "schedule",                null: false
-    t.string   "avatar",      limit: 255, null: false
-    t.string   "cover",       limit: 255, null: false
-    t.integer  "capacity",    limit: 4,   null: false
+    t.string   "name",        null: false
+    t.string   "description", null: false
+    t.datetime "schedule",    null: false
+    t.string   "avatar",      null: false
+    t.string   "cover",       null: false
+    t.integer  "capacity",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "identities", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4
-    t.string   "provider",   limit: 255
-    t.string   "uid",        limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
 
-  create_table "places", force: :cascade do |t|
-    t.string   "name",       limit: 255, null: false
-    t.string   "address",    limit: 255, null: false
-    t.integer  "event_id",   limit: 4,   null: false
+  create_table "industries", force: :cascade do |t|
+    t.string   "name",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  create_table "industry_area_users", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "industry_area_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "industry_area_users", ["industry_area_id"], name: "index_industry_area_users_on_industry_area_id", using: :btree
+  add_index "industry_area_users", ["user_id"], name: "index_industry_area_users_on_user_id", using: :btree
+
+  create_table "industry_areas", force: :cascade do |t|
+    t.integer  "industry_id"
+    t.integer  "area_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "industry_areas", ["area_id"], name: "index_industry_areas_on_area_id", using: :btree
+  add_index "industry_areas", ["industry_id"], name: "index_industry_areas_on_industry_id", using: :btree
+
+  create_table "places", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.string   "address",    null: false
+    t.integer  "event_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "places", ["event_id"], name: "index_places_on_event_id", using: :btree
+
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  limit: 255, default: "", null: false
-    t.string   "encrypted_password",     limit: 255, default: "", null: false
-    t.string   "name",                   limit: 255,              null: false
-    t.string   "last_name",              limit: 255,              null: false
-    t.string   "avatar",                 limit: 255
-    t.string   "profile",                limit: 255,              null: false
-    t.string   "phone",                  limit: 255
-    t.string   "reset_password_token",   limit: 255
+    t.string   "email",                             default: "", null: false
+    t.string   "encrypted_password",                default: "", null: false
+    t.string   "name",                                           null: false
+    t.string   "last_name",                                      null: false
+    t.string   "avatar"
+    t.string   "profile",                                        null: false
+    t.string   "phone"
+    t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
+    t.integer  "sign_in_count",                     default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",     limit: 255
-    t.string   "last_sign_in_ip",        limit: 255
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
     t.string   "authentication_token",   limit: 30
   end
 

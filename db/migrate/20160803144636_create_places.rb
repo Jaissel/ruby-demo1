@@ -3,7 +3,7 @@ class CreatePlaces < ActiveRecord::Migration
     create_table :places do |t|
       t.string :name, null: false
       t.string :address, null: false
-      t.integer :event_id, null: false
+      t.references :event, index: true
 
       t.timestamps
     end

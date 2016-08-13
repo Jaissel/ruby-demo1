@@ -1,4 +1,5 @@
 class Users::SessionsController < Devise::SessionsController
+  skip_before_filter :verify_signed_out_user
   respond_to :json
 
 	def destroy

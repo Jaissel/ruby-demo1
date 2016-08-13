@@ -21,13 +21,3 @@ group :production do
   gem 'rails_12factor', group: :production
   gem 'uglifier'
 end
-
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Deploy with Capistrano
-# gem 'capistrano', :group => :development
-
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'

@@ -6,7 +6,7 @@ class Api::UsersController < ApplicationController
     if !@user.nil?
       render json: {
                       success: true,
-                      response: @user.to_json
+                      response: UserSerializer.new(@user).serializable_hash
                     }
     else
       render json: {

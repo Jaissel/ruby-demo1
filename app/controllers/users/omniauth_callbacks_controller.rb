@@ -1,4 +1,5 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  skip_before_filter :verify_signed_out_user
   respond_to :json
 
   def linkedin

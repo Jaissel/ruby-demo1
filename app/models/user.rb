@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  validates_presence_of :name,:last_name, :profile, :email
 
 
   def self.find_for_linkedin_oauth(access_token, signed_in_resource=nil, provider)

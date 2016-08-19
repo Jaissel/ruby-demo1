@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 gem 'rails', '4.2.1'
 gem 'rails-api', require: 'rails-api/action_controller/api'
 gem 'active_model_serializers'
@@ -11,7 +10,9 @@ gem 'simple_token_authentication', '~> 1.0'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-linkedin'
-gem "figaro"
+gem 'figaro'
+
+gem 'responders', '~> 2.0'
 
 group :development, :test do
   gem 'spring'

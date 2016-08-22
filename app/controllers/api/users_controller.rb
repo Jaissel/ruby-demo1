@@ -31,6 +31,21 @@ class Api::UsersController < ApplicationController
     end
   end
 
+  def attendances
+    if !@user.nil?
+      @attendances = Industry.all.map { |a| AttendanceSerializer.new(a).serializable_hash }
+      render json: {
+                      success: true,
+                      response: @attendances
+                    }
+    else
+      render json: {
+                      success: false,
+                      info: "The user doesn't exist."
+                    }
+    end
+  end
+
   private
     def set_user
       @user = User.find(params[:id])

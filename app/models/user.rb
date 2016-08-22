@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
 
   has_many :industry_area_users
   has_many :industries, through: :industry_area_users
+  has_many :attendances
 
   validates_presence_of :name, :last_name, :profile, :email
 

@@ -7,11 +7,14 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
-    resources :users, only: [:show]
+    resources :users, only: [:show] do
+      get :attendances
+    end
     resources :industries, only: [:index] do
       get :areas
     end
     resources :industry_area_users, only: [:create]
     resources :events, only: [:index, :show]
+    resources :attendances, only: [:destroy, :create]
   end
 end

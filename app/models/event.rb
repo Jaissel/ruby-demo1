@@ -9,6 +9,7 @@
 #t.datetime "updated_at"
 class Event < ActiveRecord::Base
   belongs_to :place
+  has_many :attendances
   validates_presence_of :name, :description, :schedule, :avatar, :cover, :capacity
 
 end

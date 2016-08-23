@@ -12,4 +12,11 @@ class Event < ActiveRecord::Base
   has_many :attendances
   validates_presence_of :name, :description, :schedule, :avatar, :cover, :capacity
 
+  has_attached_file :avatar
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+
+  has_attached_file :cover
+  validates_attachment_content_type :cover, content_type: /\Aimage\/.*\z/
+
+
 end

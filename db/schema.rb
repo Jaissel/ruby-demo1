@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160822022602) do
+ActiveRecord::Schema.define(version: 20160823034821) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,15 +67,21 @@ ActiveRecord::Schema.define(version: 20160822022602) do
   add_index "attendances", ["user_id"], name: "index_attendances_on_user_id", using: :btree
 
   create_table "events", force: :cascade do |t|
-    t.string   "name",        null: false
-    t.string   "description", null: false
-    t.datetime "schedule",    null: false
-    t.string   "avatar",      null: false
-    t.string   "cover",       null: false
-    t.integer  "capacity",    null: false
+    t.string   "name",                null: false
+    t.string   "description",         null: false
+    t.datetime "schedule",            null: false
+    t.integer  "capacity",            null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "place_id"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string   "cover_file_name"
+    t.string   "cover_content_type"
+    t.integer  "cover_file_size"
+    t.datetime "cover_updated_at"
   end
 
   create_table "identities", force: :cascade do |t|

@@ -11,6 +11,8 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-linkedin'
 gem 'figaro'
+gem 'gmaps4rails'
+gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 
 gem 'responders', '~> 2.0'
 

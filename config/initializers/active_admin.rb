@@ -1,3 +1,11 @@
+Rails.application.config.after_initialize do
+  javascripts = []
+  javascripts << "http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
+  javascripts << "http://maps.googleapis.com/maps/api/js?key=AIzaSyDRY-iTkRP6hWH5GuEc2d05JHr3pre7MRo&callback=initMap"
+  javascripts << "/assets/geo-marker.js"
+  javascripts += ActiveAdmin.application.javascripts.to_a
+  ActiveAdmin.application.javascripts.replace javascripts
+end
 ActiveAdmin.setup do |config|
   # == Site Title
   #

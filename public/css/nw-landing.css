@@ -380,6 +380,10 @@ section.app .feature-item h3 {
 }
 section.app .screen{
   margin-top: -20px;
+  text-align: center;
+}
+section.app .screen img{
+  display: inline-block;
 }
 section.app .app-icon{
   margin-top: 18px;

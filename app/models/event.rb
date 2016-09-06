@@ -10,7 +10,7 @@
 class Event < ActiveRecord::Base
   belongs_to :place
   has_many :attendances
-  validates_presence_of :name, :description, :schedule, :avatar, :cover, :capacity, :latitude, :longitude
+  validates_presence_of :name, :description, :schedule, :avatar, :cover, :capacity
 
   has_attached_file :avatar
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/

@@ -3,7 +3,7 @@ ActiveAdmin.register Event do
     skip_before_filter :authenticate_user!
   end
 
-  permit_params :name, :description, :schedule, :avatar, :cover, :capacity, :place_id, :latitude, :longitude
+  permit_params :name, :description, :schedule, :avatar, :cover, :capacity, :place_id
 
   form do |f|
     f.inputs "Event Details" do
@@ -14,10 +14,6 @@ ActiveAdmin.register Event do
       f.input :cover, :required => false, :as => :file
       f.input :capacity
       f.input :place, :label => "Places", :include_blank => false, :as => :select, :collection => Place.all.collect {|p| [p.name, p.id]}
-      f.inputs "Location", :'data-geousable' => 'yup', :id => 'map_div' do
-        f.input :latitude, :input_html => { :id => 'place_latitude' }
-        f.input :longitude, :input_html => { :id => 'place_longitude' }
-      end
     end
     f.actions
    end
@@ -35,8 +31,6 @@ ActiveAdmin.register Event do
       end
       row :capacity
       row :place
-      row :latitude
-      row :longitude
     end
    end
 

@@ -25,10 +25,12 @@ module Networking
     config.middleware.use ActionDispatch::Flash
     config.middleware.use Rack::MethodOverride
     config.middleware.use ActionDispatch::Cookies
-    
+
     config.active_record.raise_in_transactional_callbacks = true
     config.middleware.insert_after(ActiveRecord::QueryCache, ActionDispatch::Cookies)
     config.middleware.insert_after(ActionDispatch::Cookies, ActionDispatch::Session::CookieStore)
 
+    config.assets.enabled = true
+    config.assets.paths << Rails.root.join("app", "assets", "javascripts", "geo-marker")
   end
 end

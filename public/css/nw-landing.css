@@ -423,6 +423,7 @@ section.app .feature-item i {
 }
 section.contact {
   text-align: center;
+  padding: 100px 0px;
 }
 section.contact h2 {
   margin-top: 0;
@@ -461,6 +462,7 @@ section.contact form a{
   color: #000;
   text-decoration: none;
   float: right;
+  margin: 10px;
 }
 section.contact form a img{
   margin-right: 10px;

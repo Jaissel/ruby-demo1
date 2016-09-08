@@ -8,7 +8,6 @@ Bundler.require(*Rails.groups)
 
 module Networking
   class Application < Rails::Application
-    config.api_only = false
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -32,5 +31,9 @@ module Networking
 
     config.assets.enabled = true
     config.assets.paths << Rails.root.join("app", "assets", "javascripts", "geo-marker")
+
+    config.active_support.escape_html_entities_in_json = true
+
+    config.api_only = false
   end
 end

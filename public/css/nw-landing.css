@@ -321,6 +321,7 @@ section.app .section-heading {
 section.app .section-heading p {
   font-family: 'Montserrat-Light';
   font-size: 16px;
+  margin-bottom: 10px;
 }
 h1.section-heading,
 h1.section-heading {

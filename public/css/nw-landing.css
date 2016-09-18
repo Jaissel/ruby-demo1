@@ -276,6 +276,16 @@ section.download .badges .badge-link img {
     font-size: 70px;
   }
 }
+
+@media (max-width: 768px) {
+  .bg-primary, .fun-facts{
+    background-size: auto 100% !important;
+    background-position: center !important;
+  }
+  footer button {
+    width: 95% !important;
+  }
+}
 section.features{
   background-color: #efefef;
 }

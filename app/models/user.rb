@@ -32,6 +32,22 @@ class User < ActiveRecord::Base
   validates_presence_of :name, :last_name, :profile, :email
 
 
+  def self.find_for_linkedin_sign_up(data)
+    identity = Identity.find_for_params(data)
+
+    user = identity.user
+    if user.nil?
+      email = data[:email] ? data[:email] : "#{uid}@withoutemail.com"
+      user = User.create!(email: email, name: data[:name], last_name: data[:last_name], password: Devise.friendly_token[0,20], avatar: data[:avatar], profile: data[:profile])
+    end
+
+    if identity.user != user
+      identity.user = user
+      identity.save!
+    end
+    user
+  end
+
   def self.find_for_linkedin_oauth(access_token, signed_in_resource=nil, provider)
     data = access_token.info
     identity = Identity.find_for_oauth(access_token)

@@ -3,7 +3,8 @@ ActiveAdmin.register Event do
     skip_before_filter :authenticate_user!
   end
 
-  permit_params :name, :description, :schedule, :avatar, :cover, :capacity, :place_id
+  permit_params :name, :description, :schedule, :avatar, :cover, :capacity, :place_id,
+                :industry_area_events_attributes => [ :id, :industry_area_id, :event_id, :_destroy ]
 
   form do |f|
     f.inputs "Event Details" do
@@ -14,6 +15,12 @@ ActiveAdmin.register Event do
       f.input :cover, :required => false, :as => :file
       f.input :capacity
       f.input :place, :label => "Places", :include_blank => false, :as => :select, :collection => Place.all.collect {|p| [p.name, p.id]}
+
+      f.inputs do
+        f.has_many :industry_area_events, heading: 'Industries and Areas for Events', allow_destroy: true, new_record: true do |ff|
+          ff.input :industry_area, :as => :select, :collection => IndustryArea.all.map {|u| ["#{u.industry.name} with #{u.area.name}", u.id]}, :include_blank => false
+        end
+      end
     end
     f.actions
    end

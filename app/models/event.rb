@@ -10,7 +10,9 @@
 class Event < ActiveRecord::Base
   belongs_to :place
   has_many :attendances
+  has_many :industry_area_events
   validates_presence_of :name, :description, :schedule, :avatar, :cover, :capacity
+  accepts_nested_attributes_for :industry_area_events
 
   has_attached_file :avatar
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/, :path => "/var/www/html/networking/images/:class/:attachment/:id_partition/:filename"

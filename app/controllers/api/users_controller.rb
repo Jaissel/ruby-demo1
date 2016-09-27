@@ -1,5 +1,5 @@
 class Api::UsersController < ApplicationController
-  before_action :set_user, only: [:destroy, :show]
+  before_action :set_user, only: [:destroy, :show, :attendances]
   respond_to :json
 
   def show
@@ -33,7 +33,7 @@ class Api::UsersController < ApplicationController
 
   def attendances
     if !@user.nil?
-      @attendances = Industry.all.map { |a| AttendanceSerializer.new(a).serializable_hash }
+      @attendances = @user.attendances.map { |a| AttendanceSerializer.new(a).serializable_hash }
       render json: {
                       success: true,
                       response: @attendances
@@ -48,6 +48,6 @@ class Api::UsersController < ApplicationController
 
   private
     def set_user
-      @user = User.find(params[:id])
+      @user = User.find(params[:id].nil? ? params[:user_id] : params[:id])
     end
 end

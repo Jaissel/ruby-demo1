@@ -3,7 +3,7 @@ class Api::IndustryAreaUsersController < ApplicationController
 
   def create
     @industry_area = IndustryArea.find_or_create_by(industry_id: params[:industry_id], area_id: params[:area_id])
-    @industry_area_users = IndustryAreaUser.new(user_id: params[:user_id], industry_area_id: @industry_area.id)
+    @industry_area_users = IndustryAreaUser.find_or_initialize_by(user_id: params[:user_id], industry_area_id: @industry_area.id)
     if @industry_area_users.save
       render json: {
                       success: true,

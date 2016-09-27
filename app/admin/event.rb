@@ -3,7 +3,8 @@ ActiveAdmin.register Event do
     skip_before_filter :authenticate_user!
   end
 
-  permit_params :name, :description, :schedule, :avatar, :cover, :capacity, :place_id
+  permit_params :name, :description, :schedule, :avatar, :cover, :capacity, :place_id,
+                :industry_area_events_attributes => [ :id, :industry_area_id, :event_id, :_destroy ]
 
   form do |f|
     f.inputs "Event Details" do

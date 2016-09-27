@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160906201921) do
+ActiveRecord::Schema.define(version: 20160927183546) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20160906201921) do
   create_table "attendances", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "event_id"
-    t.boolean  "status",     null: false
+    t.boolean  "status",     default: true, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -99,6 +99,16 @@ ActiveRecord::Schema.define(version: 20160906201921) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "industry_area_events", force: :cascade do |t|
+    t.integer  "event_id"
+    t.integer  "industry_area_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "industry_area_events", ["event_id"], name: "index_industry_area_events_on_event_id", using: :btree
+  add_index "industry_area_events", ["industry_area_id"], name: "index_industry_area_events_on_industry_area_id", using: :btree
 
   create_table "industry_area_users", force: :cascade do |t|
     t.integer  "user_id"

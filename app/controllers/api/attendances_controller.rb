@@ -3,16 +3,24 @@ class Api::AttendancesController < ApplicationController
   respond_to :json
 
   def create
-    @attendance = Attendance.new(attendance_params)
-    if @attendance.save
+    @attendance = Attendance.find_or_initialize_by(event_id: params[:event_id], user_id: params[:user_id])
+    if @attendance.new_record?
+      if @attendance.save
+        render json: {
+                      success: true,
+                      response: AttendanceSerializer.new(@attendance).serializable_hash
+                    }
+      else
+        render json: {
+                      success: false,
+                      info: @attendance.errors.to_json
+                    }
+      end
+    else
+      @attendance.update_attributes(status: !@attendance.status)
       render json: {
                     success: true,
-                    response: @attendance.to_json
-                  }
-    else
-      render json: {
-                    success: false,
-                    info: @attendance.errors.to_json
+                    response: AttendanceSerializer.new(@attendance).serializable_hash
                   }
     end
   end

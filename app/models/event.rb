@@ -13,9 +13,9 @@ class Event < ActiveRecord::Base
   validates_presence_of :name, :description, :schedule, :avatar, :cover, :capacity
 
   has_attached_file :avatar
-  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/, :path => "/var/www/html/networking/images/:class/:attachment/:id_partition/:filename"
 
   has_attached_file :cover
-  validates_attachment_content_type :cover, content_type: /\Aimage\/.*\z/
+  validates_attachment_content_type :cover, content_type: /\Aimage\/.*\z/, :path => "/var/www/html/networking/images/:class/:attachment/:id_partition/:filename"
 
 end

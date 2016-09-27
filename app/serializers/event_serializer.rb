@@ -1,5 +1,5 @@
 class EventSerializer < ActiveModel::Serializer
-  attributes :id, :name, :description, :schedule, :avatar, :cover, :capacity, :industries, :areas
+  attributes :id, :name, :description, :schedule, :avatar, :cover, :capacity, :industries, :areas, :users_attending, :users_attending_count
   belongs_to :place
 
   def schedule
@@ -22,6 +22,14 @@ class EventSerializer < ActiveModel::Serializer
       @event_areas << AreaSerializer.new(industry_area.area).serializable_hash
     end
     @event_areas
+  end
+
+  def users_attending
+    object.attendances.where(status: true)
+  end
+
+  def users_attending_count
+    object.attendances.where(status: true).count
   end
 
 end

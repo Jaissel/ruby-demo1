@@ -1,5 +1,5 @@
 class EventSerializer < ActiveModel::Serializer
-  attributes :id, :name, :description, :schedule, :avatar, :cover, :capacity, :industries, :areas, :users_attending, :users_attending_count
+  attributes :id, :name, :description, :schedule, :avatar, :cover, :capacity, :industries, :areas, :users_attending, :users_attending_count, :admin_user
   belongs_to :place
 
   def schedule

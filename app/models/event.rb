@@ -9,6 +9,7 @@
 #t.datetime "updated_at"
 class Event < ActiveRecord::Base
   belongs_to :place
+  belongs_to :admin_user
   has_many :attendances
   has_many :industry_area_events
   validates_presence_of :name, :description, :schedule, :avatar, :cover, :capacity

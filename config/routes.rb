@@ -15,5 +15,9 @@ Rails.application.routes.draw do
     resources :industry_area_users, only: [:create]
     resources :events, only: [:index, :show]
     resources :attendances, only: [:destroy, :create]
+    scope :search, :controller => 'search' do
+      get :by_areas
+      get :by_industries
+    end
   end
 end

@@ -12,6 +12,7 @@ class Event < ActiveRecord::Base
   belongs_to :admin_user
   has_many :attendances
   has_many :industry_area_events
+  has_many :industry_areas, through: :industry_area_events
   validates_presence_of :name, :description, :schedule, :avatar, :cover, :capacity
   accepts_nested_attributes_for :industry_area_events
 

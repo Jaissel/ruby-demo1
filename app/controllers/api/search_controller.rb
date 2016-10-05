@@ -3,6 +3,14 @@ class Api::SearchController < ApplicationController
   before_action :find_events_by_areas, only: [:by_areas]
   before_action :find_events_by_industries, only: [:by_industries]
 
+  def by_text
+    @events_by_text = Event.all.match_name(params[:text])
+    @events = events_serialized(@events_by_text)
+    render :json => { :success => true,
+                      :events => @events
+                    }
+  end
+
   def by_areas
     render :json => { :success => true,
                       :events => @events
@@ -30,7 +38,7 @@ class Api::SearchController < ApplicationController
       IndustryAreaEvent.where(industry_area_id: industry_area_id).map { |iae| @events_by_areas << iae.event }
     end
 
-    @events = @events_by_areas.map { |e| EventSerializer.new(e).serializable_hash }
+    @events = events_serialized(@events_by_areas)
   end
 
   def find_events_by_industries
@@ -46,7 +54,11 @@ class Api::SearchController < ApplicationController
       IndustryAreaEvent.where(industry_area_id: industry_area_id).map { |iae| @events_by_industries << iae.event }
     end
 
-    @events = @events_by_industries.map { |e| EventSerializer.new(e).serializable_hash }
+    @events = events_serialized(@events_by_industries)
+  end
+
+  def events_serialized(events)
+    events.map { |e| EventSerializer.new(e).serializable_hash }
   end
 
 end

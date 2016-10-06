@@ -7,19 +7,19 @@ class Api::SearchController < ApplicationController
     @events_by_text = Event.all.match_name(params[:text])
     @events = events_serialized(@events_by_text)
     render :json => { :success => true,
-                      :events => @events
+                      :response => @events
                     }
   end
 
   def by_areas
     render :json => { :success => true,
-                      :events => @events
+                      :response => @events
                     }
   end
 
   def by_industries
     render :json => { :success => true,
-                      :events => @events
+                      :response => @events
                     }
   end
 

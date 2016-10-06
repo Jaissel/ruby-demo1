@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :industries, only: [:index] do
       get :areas
     end
+    resources :areas, only: [:index]
     resources :industry_area_users, only: [:create]
     resources :events, only: [:index, :show]
     resources :attendances, only: [:destroy, :create]

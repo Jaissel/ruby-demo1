@@ -33,7 +33,7 @@ class Api::UsersController < ApplicationController
 
   def attendances
     if !@user.nil?
-      @attendances = @user.attendances.map { |a| AttendanceSerializer.new(a).serializable_hash }
+      @attendances = @user.attendances.attending.map { |a| AttendanceSerializer.new(a).serializable_hash }
       render json: {
                       success: true,
                       response: @attendances

@@ -12,6 +12,8 @@ gem 'omniauth'
 gem 'omniauth-linkedin'
 gem 'figaro'
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
+gem 'kaminari'
+gem 'api-pagination'
 
 gem 'responders', '~> 2.0'
 

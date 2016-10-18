@@ -3,10 +3,11 @@ class Api::EventsController < ApplicationController
   respond_to :json
 
   def index
-    @events = Event.all.map { |e| EventSerializer.new(e).serializable_hash }
+    @events = paginate Event.all, per_page: params[:offset].to_i
+    events_serialized = @events.map { |e| EventSerializer.new(e).serializable_hash }
     render json: {
                     success: true,
-                    response: @events
+                    response: events_serialized
                   }
   end
 

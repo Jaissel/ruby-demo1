@@ -71,6 +71,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    api-pagination (4.1.1)
     arbre (1.1.1)
       activesupport (>= 3.0.0)
     arel (6.0.3)
@@ -235,8 +236,10 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   activeadmin!
+  api-pagination
   devise
   figaro
+  kaminari
   multi_json
   omniauth
   omniauth-linkedin

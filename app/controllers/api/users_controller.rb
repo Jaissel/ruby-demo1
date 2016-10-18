@@ -1,5 +1,5 @@
 class Api::UsersController < ApplicationController
-  before_action :set_user, only: [:destroy, :show, :attendances]
+  before_action :set_user, only: [:destroy, :show, :attendances, :attending, :not_attending]
   respond_to :json
 
   def show
@@ -34,6 +34,36 @@ class Api::UsersController < ApplicationController
   def attendances
     if !@user.nil?
       @attendances = @user.attendances.map { |a| AttendanceSerializer.new(a).serializable_hash }
+      render json: {
+                      success: true,
+                      response: @attendances
+                    }
+    else
+      render json: {
+                      success: false,
+                      info: "The user doesn't exist."
+                    }
+    end
+  end
+
+  def attending
+    if !@user.nil?
+      @attendances = @user.attendances.attending.active_events.map { |a| AttendanceSerializer.new(a).serializable_hash }
+      render json: {
+                      success: true,
+                      response: @attendances
+                    }
+    else
+      render json: {
+                      success: false,
+                      info: "The user doesn't exist."
+                    }
+    end
+  end
+
+  def not_attending
+    if !@user.nil?
+      @attendances = @user.attendances.not_attending.active_events.map { |a| AttendanceSerializer.new(a).serializable_hash }
       render json: {
                       success: true,
                       response: @attendances

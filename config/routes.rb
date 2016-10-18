@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   namespace :api do
     resources :users, only: [:show] do
       get :attendances
+      get :attending
+      get :not_attending
     end
     resources :industries, only: [:index] do
       get :areas

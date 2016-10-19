@@ -25,11 +25,11 @@ class EventSerializer < ActiveModel::Serializer
   end
 
   def users_attending
-    object.attendances.where(status: true)
+    object.attendances.attending.map{|a| a.user}
   end
 
   def users_attending_count
-    object.attendances.where(status: true).count
+    object.attendances.attending.count
   end
 
 end

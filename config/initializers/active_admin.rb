@@ -1,8 +1,8 @@
 Rails.application.config.after_initialize do
   javascripts = []
   javascripts << "http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
-  javascripts << "http://maps.googleapis.com/maps/api/js?key=AIzaSyDRY-iTkRP6hWH5GuEc2d05JHr3pre7MRo&callback=initMap"
-  javascripts << ActionController::Base.helpers.asset_path("geo-marker")
+  javascripts << "http://maps.googleapis.com/maps/api/js?key=AIzaSyAc_oWMFLRAST31F0d49nIPZ7arjNOJw2g&callback=initMap"
+  javascripts << "/assets/geo-marker-a831743a7463d1f518f5c1093b39ebbe721e984bd128bfe6d758dcbe0dbd1df6.js"
   javascripts += ActiveAdmin.application.javascripts.to_a
   ActiveAdmin.application.javascripts.replace javascripts
 end

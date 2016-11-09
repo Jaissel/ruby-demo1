@@ -8,7 +8,7 @@ class Api::AttendancesController < ApplicationController
       if @attendance.save
         render json: {
                       success: true,
-                      response: AttendanceSerializer.new(@attendance).serializable_hash
+                      response: AttendanceSerializer.new(@attendance, current_user: current_user).serializable_hash
                     }
       else
         render json: {
@@ -20,7 +20,7 @@ class Api::AttendancesController < ApplicationController
       @attendance.update_attributes(status: !@attendance.status)
       render json: {
                     success: true,
-                    response: AttendanceSerializer.new(@attendance).serializable_hash
+                    response: AttendanceSerializer.new(@attendance, current_user: current_user).serializable_hash
                   }
     end
   end
@@ -30,7 +30,7 @@ class Api::AttendancesController < ApplicationController
     if @attendance.errors.empty?
       render :json => {
                         success: true,
-                        attendance: AttendanceSerializer.new(@attendance).serializable_hash
+                        attendance: AttendanceSerializer.new(@attendance, current_user: current_user).serializable_hash
                       }
     else
       render :json => {

@@ -25,7 +25,7 @@ class EventSerializer < ActiveModel::Serializer
   end
 
   def users_attending
-    object.attendances.attending.map{|a| a.user}
+    object.attendances.attending.map{|a| { id: a.user.id, name: a.user.name } }
   end
 
   def users_attending_count

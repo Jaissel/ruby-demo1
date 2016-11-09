@@ -33,10 +33,10 @@ class Api::UsersController < ApplicationController
 
   def attendances
     if !@user.nil?
-      @attendances = @user.attendances.map { |a| AttendanceSerializer.new(a, current_user: @user).serializable_hash }
+      events_serialized = @user.attendances.map { |a| EventSerializer.new(a.event, current_user: @user).serializable_hash }
       render json: {
                       success: true,
-                      response: @attendances
+                      response: events_serialized
                     }
     else
       render json: {
@@ -48,10 +48,10 @@ class Api::UsersController < ApplicationController
 
   def attending
     if !@user.nil?
-      @attendances = @user.attendances.attending.active_events.map { |a| AttendanceSerializer.new(a, current_user: @user).serializable_hash }
+      events_serialized = @user.attendances.attending.active_events.map { |a| EventSerializer.new(a.event, current_user: @user).serializable_hash }
       render json: {
                       success: true,
-                      response: @attendances
+                      response: events_serialized
                     }
     else
       render json: {
@@ -63,10 +63,10 @@ class Api::UsersController < ApplicationController
 
   def not_attending
     if !@user.nil?
-      @attendances = @user.attendances.not_attending.active_events.map { |a| AttendanceSerializer.new(a, current_user: @user).serializable_hash }
+      events_serialized = @user.attendances.not_attending.active_events.map { |a| EventSerializer.new(a.event, current_user: @user).serializable_hash }
       render json: {
                       success: true,
-                      response: @attendances
+                      response: events_serialized
                     }
     else
       render json: {

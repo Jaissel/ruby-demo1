@@ -58,7 +58,7 @@ class Api::SearchController < ApplicationController
   end
 
   def events_serialized(events)
-    events.map { |e| EventSerializer.new(e).serializable_hash }
+    events.map { |e| EventSerializer.new(e, current_user: current_user).serializable_hash }
   end
 
 end

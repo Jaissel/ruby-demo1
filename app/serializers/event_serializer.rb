@@ -1,5 +1,5 @@
 class EventSerializer < ActiveModel::Serializer
-  attributes :id, :name, :description, :schedule, :avatar, :cover, :capacity, :industries, :areas, :users_attending, :users_attending_count, :admin_user
+  attributes :id, :name, :description, :schedule, :avatar, :cover, :capacity, :industries, :areas, :users_attending, :users_attending_count, :admin_user, :attending
   belongs_to :place
 
   def schedule
@@ -25,11 +25,16 @@ class EventSerializer < ActiveModel::Serializer
   end
 
   def users_attending
-    object.attendances.attending.map{|a| a.user}
+    object.attendances.attending.map{|a| { id: a.user.id, name: a.user.name } }
   end
 
   def users_attending_count
     object.attendances.attending.count
+  end
+
+  def attending
+    user_attending = object.attendances.find_by_user_id(instance_options[:current_user].id)
+    user_attending.nil? ? false : user_attending.status
   end
 
 end

@@ -309,12 +309,15 @@
             <div class="col-md-9">
               <div class="row">
                 <h3>Say Hello!<h3>
+                <p id="contact-name-label" class="left-text email-form-label hidden">Please fill the name field</p>
+                <p id="contact-email-label" class="left-text email-form-label hidden">Please fill the email field</p>
+                <p id="contact-message-label" class="left-text email-form-label hidden">Please fill the message field</p>
               </div>
               <form>
-                <input id="contact-name" placeholder="Name"></input>
-                <input id="contact-email" placeholder="Email"></input>
-                <input id="contact-message" placeholder="Message"></input>
-                <a><img src="../img/buzon.png"></img>Send message</a>
+                <input id="contact-name" class="email-form-field" placeholder="Name"></input>
+                <input id="contact-email" class="email-form-field" placeholder="Email"></input>
+                <input id="contact-message" class="email-form-field" placeholder="Message"></input>
+                <a onclick="submitEmailForm()"><img src="../img/buzon.png"></img>Send message</a>
               </form>
             </div>
           </div>

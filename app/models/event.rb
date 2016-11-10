@@ -23,5 +23,6 @@ class Event < ActiveRecord::Base
   validates_attachment_content_type :cover, content_type: /\Aimage\/.*\z/
 
   scope :match_name, ->(text) { where("lower(name) LIKE ? OR lower(description) LIKE ? ", "%#{text.downcase}%", "%#{text.downcase}%") }
+  scope :active_events, -> { where("schedule >= ?", DateTime.now ) }
 
 end

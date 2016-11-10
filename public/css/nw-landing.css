@@ -481,6 +481,12 @@ section.contact form a{
 section.contact form a img{
   margin-right: 10px;
 }
+section.contact .email-form-label{
+  color: red !important;
+}
+section.contact .danger{
+  border-bottom: 2px solid red;
+}
 footer {
   background-color: #000;
   padding: 25px 0;

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
-    resources :users, only: [:show] do
+    resources :users, only: [:show, :update] do
       get :attendances
       get :attending
       get :not_attending

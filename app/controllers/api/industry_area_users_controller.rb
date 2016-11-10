@@ -14,7 +14,7 @@ class Api::IndustryAreaUsersController < ApplicationController
     industry_areas = []
     @industry_area_users = []
     params[:industry_area].each do |industry_area_param|
-      industry_areas << IndustryArea.find_or_create_by(industry_id: industry_area_param[0], area_id: industry_area_param[1])
+      industry_areas << IndustryArea.find_or_create_by(industry_id: industry_area_param[:industry_id], area_id: industry_area_param[:area_id])
     end
 
     industry_areas.each do |industry_area|

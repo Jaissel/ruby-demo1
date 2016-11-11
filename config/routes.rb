@@ -24,4 +24,5 @@ Rails.application.routes.draw do
       get :by_industries
     end
   end
+  match '/new_email' => 'api/users#new_email', :via => :get
 end

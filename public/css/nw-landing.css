@@ -484,6 +484,9 @@ section.contact form a img{
 section.contact .email-form-label{
   color: red !important;
 }
+section.contact .email-form-success{
+  color: green !important;
+}
 section.contact .danger{
   border-bottom: 2px solid red;
 }

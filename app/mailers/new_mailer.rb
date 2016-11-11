@@ -5,7 +5,7 @@ default from: 'info@nwmeeting.com'
     @name = name
     @email = email
     @message = message
-    mail(to: 'zaeta88@gmail.com', subject: 'New contact email sended.')
+    mail(to: 'info@nwmeeting.com', subject: 'New contact email sended.')
   end
 
   def email_recieved(email)

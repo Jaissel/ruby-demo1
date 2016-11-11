@@ -1,6 +1,7 @@
 class Api::UsersController < ApplicationController
   before_action :set_user, only: [:destroy, :show, :update, :attendances, :attending, :not_attending]
   before_action :update_industry_areas, only: [:update]
+  skip_before_filter :authenticate_user!, only: [:new_email]
   respond_to :json
 
   def show
@@ -83,6 +84,15 @@ class Api::UsersController < ApplicationController
                       info: "The user doesn't exist."
                     }
     end
+  end
+
+  def new_email
+    name = params[:name]
+    email = params[:email]
+    message = params[:message]
+    NewMailer.contact_email(name, email, message).deliver_now
+    NewMailer.email_recieved(email).deliver_now
+    render json: { success: true }
   end
 
   private

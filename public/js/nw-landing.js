@@ -18,7 +18,13 @@ function submitEmailForm(){
     message_field_label.removeClass("hidden");
   }
   if (name_field.val() != "" && email_field.val() != "" && message_field.val() != ""){
-
+    $.ajax({
+      url: "/new_email?message="+message_field.val()+"&email="+email_field.val()+"&name="+name_field.val(),
+      cache: false,
+      success: function(html){
+        $("#email-form-success").removeClass("hidden");
+      }
+    });
   }
 }
 
@@ -26,6 +32,7 @@ $('.email-form-field').on('change', function() {
   if ($(this).val()!=""){
     $(this).removeClass("danger");
     $('.email-form-label').addClass("hidden");
+    $('#email-form-success').addClass("hidden");
   }else{
     $(this).addClass("danger");
   }

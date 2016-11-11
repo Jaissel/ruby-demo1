@@ -81,12 +81,13 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.smtp_settings = {
-    address: "mail.nwmeeting.com",
-    port: 587,
-    domain: "nwmeeting.com",
-    authentication: "plain",
-    enable_starttls_auto: true,
-    user_name: "info@nwmeeting.com",
-    password:  "NWMeetings2016."
+    :address              => ENV["mailer_address"],
+    :port                 => 587,
+    :domain               => ENV["mailer_domain"],
+    :user_name            => ENV["mailer_user_name"],
+    :password             => ENV["mailer_password"],
+    :authentication       => "login",
+    :enable_starttls_auto => true,
+    :openssl_verify_mode  => 'none'
   }
 end

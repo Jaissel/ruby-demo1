@@ -1,4 +1,4 @@
-class NewMailer < ApplicationMailer
+class NewMailer < ActionMailer::Base
 default from: 'info@nwmeeting.com'
 
   def contact_email(name, email, message)

@@ -19,7 +19,7 @@ class Api::UsersController < ApplicationController
   end
 
   def update
-    @user.update_attributes(name: params[:user][:name], last_name: params[:user][:last_name], avatar: params[:user][:avatar], profile: params[:user][:profile], phone: params[:user][:phone])
+    @user.update_attributes(name: params[:user][:name], last_name: params[:user][:last_name], avatar: params[:user][:avatar], profile: params[:user][:profile], phone: params[:user][:phone], company: params[:user][:company], position: params[:user][:position], location: params[:user][:location])
     render json: {
                     success: true,
                     response: UserSerializer.new(@user).serializable_hash

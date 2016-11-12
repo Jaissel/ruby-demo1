@@ -3,7 +3,7 @@ ActiveAdmin.register User do
     skip_before_filter :authenticate_user!
   end
 
-  permit_params :name, :last_name, :email, :password, :encrypted_password, :reset_password_sent_at, :reset_password_code, :avatar, :profile, :phone
+  permit_params :name, :last_name, :email, :password, :encrypted_password, :reset_password_sent_at, :reset_password_code, :avatar, :profile, :phone, :company, :position, :location
 
   index do
     selectable_column
@@ -11,6 +11,9 @@ ActiveAdmin.register User do
     column :name
     column :last_name
     column :email
+    column :location
+    column :company
+    column :position
     column :phone
     column :profile
     column :avatar
@@ -34,6 +37,9 @@ ActiveAdmin.register User do
       f.input :email
       f.input :avatar
       f.input :profile
+      f.input :location
+      f.input :company
+      f.input :position
       f.input :phone
       f.input :password
       f.input :password_confirmation

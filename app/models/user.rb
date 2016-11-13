@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
     user = identity.user
     if user.nil?
       email = data[:email] ? data[:email] : "#{uid}@withoutemail.com"
-      user = User.create!(email: email, name: data[:name], last_name: data[:last_name], password: Devise.friendly_token[0,20], avatar: data[:avatar], profile: data[:profile])
+      user = User.create!(email: email, name: data[:name], last_name: data[:last_name], password: Devise.friendly_token[0,20], avatar: data[:avatar], profile: data[:profile], location: data[:location], company: data[:company], position: data[:position])
     end
 
     if identity.user != user

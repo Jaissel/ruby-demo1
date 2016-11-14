@@ -1,21 +1,19 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :name,:last_name, :profile, :avatar, :profile, :location, :company, :position, :phone, :email, :industries, :areas, 
+  attributes :id, :name,:last_name, :profile, :avatar, :profile, :location, :company, :position, :phone, :email, :industries, :areas,
 
   def industries
-    @event_industries = []
-    object.industry_area_users.each do |iau|
-      industry_area = IndustryArea.find(iau.industry_area_id)
-      @event_industries << IndustrySerializer.new(industry_area.industry).serializable_hash
+    @user_industries = []
+    object.industry_area_users.map{|i| i.industry_area.industry_id}.uniq{ |id| id }.each do |industry_id|
+      @user_industries << IndustrySerializer.new(Industry.find(industry_id)).serializable_hash
     end
-    @event_industries
+    @user_industries
   end
 
   def areas
-    @event_areas = []
-    object.industry_area_users.each do |iau|
-      industry_area = IndustryArea.find(iau.industry_area_id)
-      @event_areas << AreaSerializer.new(industry_area.area).serializable_hash
+    @user_areas = []
+    object.industry_area_users.map{|i| i.industry_area.area_id}.uniq{ |id| id }.each do |area_id|
+      @user_areas << AreaSerializer.new(Area.find(area_id)).serializable_hash
     end
-    @event_areas
+    @user_areas
   end
 end

@@ -580,8 +580,17 @@ img::-moz-selection {
 body {
   webkit-tap-highlight-color: #222222;
 }
-.send-message{
-  float: right;
-  margin-right: 25px;
-  margin-top: 10px;
+.send-message {
+  display:inline-block;
+  border:1px solid #CCC;
+  background:#DDD;
+  box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
+  cursor:pointer;
+  vertical-align:middle;
+  padding: 5px;
+  text-align: center;
+}
+.send-message:active {
+  color:red;
+  box-shadow: 0 0 5px -1px rgba(0,0,0,0.6);
 }

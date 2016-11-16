@@ -580,3 +580,8 @@ img::-moz-selection {
 body {
   webkit-tap-highlight-color: #222222;
 }
+.send-message{
+  float: right;
+  margin-right: 25px;
+  margin-top: 10px;
+}

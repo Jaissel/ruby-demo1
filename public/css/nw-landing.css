@@ -346,6 +346,9 @@ h2.section-heading {
   font-weight: lighter;
   color: #a7a9b1;
 }
+#home .logo-home-section{
+  width: 90%;
+}
 #home p{
   font-family: 'Montserrat-Light';
   display: inline-block;

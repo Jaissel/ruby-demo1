@@ -219,6 +219,8 @@ ActiveAdmin.setup do |config|
   config.namespace :admin do |admin|
     admin.build_menu do |menu|
       menu.add id: 'places', label: proc{"Places"}, priority: 0
+      menu.add id: 'events', label: proc{"Events"}, priority: 1
+      menu.add id: 'industry_areas', label: proc{"Industry Areas"}, priority: 2
     end
   end
 

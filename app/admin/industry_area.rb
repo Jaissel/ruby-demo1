@@ -1,4 +1,5 @@
 ActiveAdmin.register IndustryArea do
+  menu parent: 'industry_areas'
   controller do
     skip_before_filter :authenticate_user!
   end

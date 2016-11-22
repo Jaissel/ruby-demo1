@@ -25,4 +25,5 @@ Rails.application.routes.draw do
     end
   end
   match '/new_email' => 'api/users#new_email', :via => :get
+  match '/termsandconditions' => 'main#termsandconditions', :via => :get
 end

@@ -1,7 +1,7 @@
 class Api::UsersController < ApplicationController
   before_action :set_user, only: [:destroy, :show, :update, :attendances, :attending, :not_attending]
   before_action :update_industry_areas, only: [:update]
-  skip_before_filter :authenticate_user!, only: [:new_email]
+  skip_before_filter :authenticate_user!, only: [:new_email, :create, :log_in]
   respond_to :json
 
   def show
@@ -95,6 +95,46 @@ class Api::UsersController < ApplicationController
     render json: { success: true }
   end
 
+  def create
+    @user = User.find_user_sign_up(params_user)
+    if @user.persisted?
+      sign_in(@user)
+      render json: {
+                      success: true,
+                      response: @user
+                    }
+    else
+      render json: {
+                      success: false,
+                      info: @user.errors
+                    }
+    end
+  end
+
+  def log_in
+    user = User.find_by(email: params[:email])
+    if user
+      if user.valid_password?(params[:password]) 
+        sign_in(user)
+        render json: {
+                      success: true,
+                      response: user
+                    }
+      else
+        render json: {
+                      success: false,
+                      info: "Please enter the valid password."
+                    }
+      end
+
+    else
+      render json: {
+                      success: false,
+                      info: "Please enter the valid email."
+                    }
+    end
+  end
+
   private
 
     def update_industry_areas
@@ -111,5 +151,10 @@ class Api::UsersController < ApplicationController
 
     def set_user
       @user = User.find(params[:id].nil? ? params[:user_id] : params[:id])
+    end
+
+
+    def params_user
+      params
     end
 end

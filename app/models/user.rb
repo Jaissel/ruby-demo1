@@ -32,6 +32,7 @@ class User < ActiveRecord::Base
   validates_presence_of :name, :last_name, :profile, :email
 
 
+
   def self.find_for_linkedin_sign_up(data)
     identity = Identity.find_for_params(data)
 
@@ -64,4 +65,14 @@ class User < ActiveRecord::Base
     end
     user
   end
+
+
+  def self.find_user_sign_up(data)
+    if data[:profile].nil? 
+      user = User.create!(email: data[:email], name: data[:name], last_name: data[:last_name], password: data[:password], password_confirmation: data[:password_confirmation],   profile: data[:profile])
+    else
+      user = User.create!(email: data[:email], name: data[:name], last_name: data[:last_name], password: data[:password], password_confirmation: data[:password_confirmation],  profile: "no profile")
+    end
+  end
+
 end

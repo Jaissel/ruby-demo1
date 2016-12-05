@@ -26,8 +26,6 @@ class Users::SessionsController < Devise::SessionsController
                   }
 	end
 
-
-
 	private
 
     def build_resource(*args)

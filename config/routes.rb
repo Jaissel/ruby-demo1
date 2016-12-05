@@ -3,10 +3,12 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :users, :skip => [:registrations, :passwords], :path => "", :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :sessions => "users/sessions"} do
     get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
+
   end
 
   namespace :api do
-    resources :users, only: [:show, :update] do
+    post 'users/sign_in' => 'users#log_in'
+    resources :users, only: [:show, :update, :create] do
       get :attendances
       get :attending
       get :not_attending

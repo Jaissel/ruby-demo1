@@ -29,7 +29,8 @@ class User < ActiveRecord::Base
   has_many :industries, through: :industry_area_users
   has_many :attendances
 
-  validates_presence_of :name, :last_name, :profile, :email
+  validates_presence_of :name, :last_name, :email
+
 
 
   def self.find_for_linkedin_sign_up(data)
@@ -64,4 +65,14 @@ class User < ActiveRecord::Base
     end
     user
   end
+
+
+  def self.find_user_sign_up(data)
+    if data[:profile].nil? 
+      user = User.create!(email: data[:email], name: data[:name], last_name: data[:last_name], password: data[:password], password_confirmation: data[:password_confirmation])
+    else
+      user = User.create!(email: data[:email], name: data[:name], last_name: data[:last_name], password: data[:password], password_confirmation: data[:password_confirmation])
+    end
+  end
+
 end

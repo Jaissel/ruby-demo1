@@ -68,11 +68,7 @@ class User < ActiveRecord::Base
 
 
   def self.find_user_sign_up(data)
-    if data[:profile].nil? 
-      user = User.create!(email: data[:email], name: data[:name], last_name: data[:last_name], password: data[:password], password_confirmation: data[:password_confirmation])
-    else
-      user = User.create!(email: data[:email], name: data[:name], last_name: data[:last_name], password: data[:password], password_confirmation: data[:password_confirmation])
-    end
+    user = User.new(email: data[:email], name: data[:name], last_name: data[:last_name], password: data[:password], password_confirmation: data[:password_confirmation])
   end
 
 end

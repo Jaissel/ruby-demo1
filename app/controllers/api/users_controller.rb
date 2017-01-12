@@ -96,9 +96,6 @@ class Api::UsersController < ApplicationController
   end
 
   def create
-    puts "AAAAAAAAAAAAAAAAAa"
-    puts User.find_by(email: params[:email]).blank?
-
     if User.find_by(email: params[:email]).blank?
       @user = User.find_user_sign_up(params_user)
 
@@ -141,7 +138,7 @@ class Api::UsersController < ApplicationController
       else
         render json: {
                       success: false,
-                      info: "Ivalida password enter the valid password, please try again.",
+                      info: "Invalida password enter the valid password, please try again.",
                       status: 404
                     }
       end
@@ -149,7 +146,7 @@ class Api::UsersController < ApplicationController
     else
       render json: {
                       success: false,
-                      info: "Invalid enter the valid email, please try again.",
+                      info: "Invalid email, please try again.",
                       status: 404
                     }
     end

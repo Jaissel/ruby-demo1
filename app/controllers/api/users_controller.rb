@@ -97,12 +97,13 @@ class Api::UsersController < ApplicationController
 
   def create
     @user = User.find_user_sign_up(params_user)
-    if @user.persisted?
+
+    if @user.save
       sign_in(@user)
       render json: {
                       success: true,
                       response: @user
-                    }
+                    }     
     else
       render json: {
                       success: false,

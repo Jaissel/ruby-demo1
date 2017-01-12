@@ -96,20 +96,36 @@ class Api::UsersController < ApplicationController
   end
 
   def create
-    @user = User.find_user_sign_up(params_user)
+    puts "AAAAAAAAAAAAAAAAAa"
+    puts User.find_by(email: params[:email]).blank?
 
-    if @user.save
-      sign_in(@user)
-      render json: {
-                      success: true,
-                      response: @user
-                    }     
+    if User.find_by(email: params[:email]).blank?
+      @user = User.find_user_sign_up(params_user)
+
+      if @user.save
+        sign_in(@user)
+        render json: {
+                        success: true,
+                        response: @user,
+                        status: 200
+                      }     
+      else
+        render json: {
+                        success: false,
+                        info: "Please enter " + @user.errors.collect{|k,v| [k.to_s]}.join(",") + ", please try again",
+                        status: 404
+                      }
+      end
+    
     else
       render json: {
-                      success: false,
-                      info: @user.errors
-                    }
+                        success: false,
+                        info: "Email is already registered, please try again",
+                        status: 404
+                      }
+
     end
+    
   end
 
   def log_in
@@ -119,19 +135,22 @@ class Api::UsersController < ApplicationController
         sign_in(user)
         render json: {
                       success: true,
-                      response: user
+                      response: user,
+                      status: 200
                     }
       else
         render json: {
                       success: false,
-                      info: "Please enter the valid password."
+                      info: "Ivalida password enter the valid password, please try again.",
+                      status: 404
                     }
       end
 
     else
       render json: {
                       success: false,
-                      info: "Please enter the valid email."
+                      info: "Invalid enter the valid email, please try again.",
+                      status: 404
                     }
     end
   end

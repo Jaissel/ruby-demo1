@@ -2,6 +2,7 @@ class Api::UsersController < ApplicationController
   before_action :set_user, only: [:destroy, :show, :update, :attendances, :attending, :not_attending]
   before_action :update_industry_areas, only: [:update]
   skip_before_filter :authenticate_user!, only: [:new_email, :create, :log_in]
+  before_action :validate_email, only: [:create, :log_in]
   respond_to :json
 
   def show
@@ -138,7 +139,7 @@ class Api::UsersController < ApplicationController
       else
         render json: {
                       success: false,
-                      info: "Invalida password enter the valid password, please try again.",
+                      info: "Invalid password enter the valid password, please try again.",
                       status: 404
                     }
       end
@@ -173,5 +174,16 @@ class Api::UsersController < ApplicationController
 
     def params_user
       params
+    end
+
+    def validate_email
+      valida_email = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+      if (valida_email =~ params[:email]).nil?
+        render json: {
+                      success: false,
+                      info: "Enter a valid email, please try again.",
+                      status: 404
+                    }
+      end
     end
 end

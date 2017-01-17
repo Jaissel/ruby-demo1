@@ -79,7 +79,6 @@ Rails.application.configure do
 
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-
   config.action_mailer.smtp_settings = {
     :address              => ENV["mailer_address"],
     :port                 => 587,

@@ -71,4 +71,13 @@ class User < ActiveRecord::Base
     user = User.new(email: data[:email], name: data[:name], last_name: data[:last_name], password: data[:password], password_confirmation: data[:password_confirmation])
   end
 
+   def send_password_reset(params)
+    code = rand(100000..999999)
+    params[:user][:reset_password_token] = code
+    self.reset_password_token = params[:user][:reset_password_token]
+    self.reset_password_sent_at = Time.zone.now
+    save!
+    NewMailer.reset_password(self).deliver_now
+  end
+
 end

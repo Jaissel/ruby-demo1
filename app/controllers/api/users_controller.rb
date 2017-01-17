@@ -1,8 +1,9 @@
 class Api::UsersController < ApplicationController
   before_action :set_user, only: [:destroy, :show, :update, :attendances, :attending, :not_attending]
   before_action :update_industry_areas, only: [:update]
-  skip_before_filter :authenticate_user!, only: [:new_email, :create, :log_in]
+  skip_before_filter :authenticate_user!, only: [:new_email, :create, :log_in, :create_reset_password]
   before_action :validate_email, only: [:create, :log_in]
+  before_filter :find_user_by_email_reset, only: [:create_reset_password]
   respond_to :json
 
   def show
@@ -153,6 +154,17 @@ class Api::UsersController < ApplicationController
     end
   end
 
+  def create_reset_password
+    if @user 
+      @user.send_password_reset(params) 
+      render  :status => 200,
+              :json => { :success => true,
+                         :info => "Reset password instructions sended.",
+                         :reset_password_token => @user.reset_password_token
+              }
+    end
+  end
+
   private
 
     def update_industry_areas
@@ -186,4 +198,34 @@ class Api::UsersController < ApplicationController
                     }
       end
     end
+
+    def find_user_by_email_reset
+    if params[:user].nil? || params[:user][:email].nil?
+      render  :status => 404,
+              :json => { :success => false,
+                         :info => "You must enter the email."
+              }
+    elsif validate_email_reset(params[:user][:email])
+      render  :status => 404,
+                :json => { :success => false,
+                           :info => "Enter a valid email, please try again."
+                }
+    else
+      
+      @user = User.find_by_email(params[:user][:email]) 
+      if @user.nil?
+        render  :status => 404,
+                :json => { :success => false,
+                           :info => "The email address is not registered."
+                }
+      end
+    end
+  end
+
+  def validate_email_reset(email)
+      valida_email = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+      (valida_email =~ email).nil?
+  end
+
+
 end

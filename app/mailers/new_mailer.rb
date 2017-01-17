@@ -15,7 +15,7 @@ default from: 'info@nwmeeting.com'
 
   def reset_password(user)
     @user = user
-    @url = Rails.env.production? ? 'https://http://nwmeeting.com/' : 'http://localhost:3000/'
+    @url = Rails.env.production? ? 'http://nwmeeting.com/' : 'http://localhost:3000/'
     @url += "password/edit.#{@user.id}?reset_password_token=#{@user.reset_password_token}"
     mail(to: @user.email, subject: 'Reset Password.')
   end

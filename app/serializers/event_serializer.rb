@@ -25,7 +25,7 @@ class EventSerializer < ActiveModel::Serializer
   end
 
   def users_attending
-    object.attendances.attending.map{|a| { id: a.user.id, position: a.user.position, company: a.user.company } unless a.user.nil? }
+    object.attendances.attending.map{|a| { id: a.user.id, position: a.user.position, company: a.user.company } unless a.user.nil? }.compact
   end
 
   def users_attending_count

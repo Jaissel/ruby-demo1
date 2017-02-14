@@ -21,11 +21,18 @@ class Api::UsersController < ApplicationController
   end
 
   def update
-    @user.update_attributes(name: params[:user][:name], last_name: params[:user][:last_name], avatar: params[:user][:avatar], profile: params[:user][:profile], phone: params[:user][:phone], company: params[:user][:company], position: params[:user][:position], location: params[:user][:location])
-    render json: {
+    if @user.update_attributes(user_params_update)
+      render json: {
                     success: true,
                     response: UserSerializer.new(@user).serializable_hash
                   }
+    else
+      render json: {
+                      success: false,
+                      info: @user.errors
+                    }
+    end
+    
   end
 
   def destroy
@@ -227,5 +234,9 @@ class Api::UsersController < ApplicationController
       (valida_email =~ email).nil?
   end
 
-
+  def user_params_update
+    params.require(:user).permit(:email, :password, 
+      :name, :last_name, :avatar, :profile, 
+      :phone, :company, :position, :location, :password)
+  end
 end

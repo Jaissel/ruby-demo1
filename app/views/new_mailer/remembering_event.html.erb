@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+	<style>
+		table {
+		    font-family: arial, sans-serif;
+		    border-collapse: collapse;
+		    width: 100%;
+		}
+
+		td, th {
+		    border: 1px solid #dddddd;
+		    text-align: left;
+		    padding: 8px;
+		}
+
+		tr:nth-child(even) {
+		    background-color: #dddddd;
+		}
+	</style>
+  </head>
+  <body>
+
+    <h4>Evento: <%= @event.name %> </h4>
+    <p><%= @event.description %>.</p>
+    <p>Lugar <%= @event.place.address %>.</p>
+
+		<% if @event.attendances.count > 0 %>
+			<h4> Guest List</h4>
+			<table>
+			  <tr>
+			    <th>Name</th>
+			    <th>Last Name</th>
+			    <th>Email</th>
+			  </tr>
+			  
+			  <% @event.attendances.each do |attendance| %> 
+			  	<tr>
+				    <td><%= attendance.user.name  %></td>
+				    <td><%= attendance.user.last_name  %></td>
+				    <td><%= attendance.user.email %></td>
+				  </tr>
+			  <% end %>
+			</table>
+		<% else %>
+			<strong> No guests for this event </strong>
+
+		<% end %>
+	
+  </body>
+</html>
+

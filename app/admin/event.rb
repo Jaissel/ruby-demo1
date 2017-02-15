@@ -4,10 +4,6 @@ ActiveAdmin.register Event do
     skip_before_filter :authenticate_user!
   end
 
-  after_create do |event|
-    #AdminMailer.comment_created(comment.id).deliver
-  end
-
   permit_params :name, :description, :schedule, :avatar, :cover, :capacity, :place_id, :admin_user_id
 
   form do |f|

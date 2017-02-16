@@ -15,7 +15,6 @@ gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 gem 'kaminari'
 gem 'api-pagination'
 gem 'sidekiq'
-
 gem 'responders', '~> 2.0'
 
 group :development, :test do

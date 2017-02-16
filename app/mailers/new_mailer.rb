@@ -19,4 +19,12 @@ default from: 'info@nwmeeting.com'
     @url += "password/edit.#{@user.id}?reset_password_token=#{@user.reset_password_token}"
     mail(to: @user.email, subject: 'Reset Password.')
   end
+
+  def remembering_event(event_id, message)
+    @message = message
+    @event = Event.find_by(id: event_id)
+    @url = Rails.env.production? ? 'http://nwmeeting.com/' : 'http://localhost:3000/'
+    mail(to: @event.place.email, from: 'info@nwmeeting.com', subject: "Remembering - #{message} #{@event.name}.")
+
+  end
 end

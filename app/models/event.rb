@@ -29,7 +29,7 @@ class Event < ActiveRecord::Base
 
   private
     def sendEmail
-      EventNotifierJob.perform_later self.id
+      EventNotifierJob.perform_later self
     end
 
 end

@@ -1,5 +1,4 @@
 class EventNotifierJob < ActiveJob::Base
-	discard_on ActiveJob::DeserializationError
   queue_as :default
 
   def perform(event_id)

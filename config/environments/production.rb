@@ -91,7 +91,7 @@ Rails.application.configure do
   #  :openssl_verify_mode  => 'none'
   #}
 
-  config.action_mailer.default_url_options = { :host => "registromd.com" }
+  config.action_mailer.default_url_options = { :host => "nwmeeting.com" }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
       address:              'smtp.zoho.com',

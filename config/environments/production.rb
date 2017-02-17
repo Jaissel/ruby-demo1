@@ -78,16 +78,29 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.active_job.queue_adapter = :sidekiq
-  config.action_mailer.perform_deliveries = true
-  config.action_mailer.raise_delivery_errors = true
+  #config.action_mailer.perform_deliveries = true
+  #config.action_mailer.raise_delivery_errors = true
+  #config.action_mailer.smtp_settings = {
+  #  :address              => ENV["mailer_address"],
+  #  :port                 => 587,
+  #  :domain               => ENV["mailer_domain"],
+  #  :user_name            => ENV["mailer_user_name"],
+  #  :password             => ENV["mailer_password"],
+  #  :authentication       => "login",
+  #  :enable_starttls_auto => true,
+  #  :openssl_verify_mode  => 'none'
+  #}
+
+  config.action_mailer.default_url_options = { :host => "registromd.com" }
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :address              => ENV["mailer_address"],
-    :port                 => 587,
-    :domain               => ENV["mailer_domain"],
-    :user_name            => ENV["mailer_user_name"],
-    :password             => ENV["mailer_password"],
-    :authentication       => "login",
-    :enable_starttls_auto => true,
-    :openssl_verify_mode  => 'none'
+      address:              'smtp.zoho.com',
+      port:                 587,
+      domain:               'zoho.com',
+      user_name:            'info@registromd.com',
+      password:             'pmed@2017',
+      authentication:       'login',
+      enable_starttls_auto: true,
+      openssl_verify_mode:  'none'
   }
 end

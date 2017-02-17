@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   devise_for :users, :skip => [:registrations], :path => "", :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :sessions => "users/sessions", passwords: 'users/passwords'} do
     get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
   end
-  
+  get "/zohoverify/verifyforzoho.html" => "main#verify"
 
   devise_scope :user do 
     post "/users/password/verify_code" => "users/passwords#verify_code"

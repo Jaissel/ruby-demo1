@@ -4,4 +4,8 @@ class MainController < ApplicationController
   def termsandconditions
 
   end
+
+  def verify
+  	
+  end
 end

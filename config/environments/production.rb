@@ -91,16 +91,19 @@ Rails.application.configure do
   #  :openssl_verify_mode  => 'none'
   #}
 
+
   config.action_mailer.default_url_options = { :host => "nwmeeting.com" }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
       address:              'smtp.zoho.com',
       port:                 587,
       domain:               'zoho.com',
-      user_name:            'info@registromd.com',
-      password:             'pmed@2017',
+      user_name:            'info@nwmeeting.com',
+      password:             'nwmeeting@2017',
       authentication:       'login',
       enable_starttls_auto: true,
       openssl_verify_mode:  'none'
   }
+
 end
+

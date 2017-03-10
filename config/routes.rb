@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
   end
   get "/zohoverify/verifyforzoho.html" => "main#verify"
+  get "/example" => "main#example"
 
   devise_scope :user do 
     post "/users/password/verify_code" => "users/passwords#verify_code"

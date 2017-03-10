@@ -8,4 +8,8 @@ class MainController < ApplicationController
   def verify
   	
   end
+
+  def example
+  	
+  end
 end

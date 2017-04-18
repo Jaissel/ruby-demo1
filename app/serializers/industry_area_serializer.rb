@@ -2,10 +2,20 @@ class IndustryAreaSerializer < ActiveModel::Serializer
   attributes :id, :name, :industry_id
 
   def id
-    object.area.id
+    
+    if !object.area.nil?
+  	  object.area.id
+  	else
+  	  nil
+  	end
   end
 
   def name
-    object.area.name
+  	if !object.area.nil?
+  	  object.area.name
+  	else
+  	  nil
+  	end
+    
   end
 end

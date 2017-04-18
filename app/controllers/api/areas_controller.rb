@@ -3,7 +3,7 @@ class Api::AreasController < ApplicationController
 
   def index
 
-    @areas = IndustryArea.all.map { |i| IndustryAreaSerializer.new(i).serializable_hash if ! i.area.nil?}.compact
+    @areas = IndustryArea.all.map { |i| IndustryAreaSerializer.new(i).serializable_hash unless i.area.nil?}.compact
     render json: {
                     success: true,
                     response: @areas

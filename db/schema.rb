@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170205024344) do
+ActiveRecord::Schema.define(version: 20170409024344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -143,6 +143,13 @@ ActiveRecord::Schema.define(version: 20170205024344) do
   add_index "industry_areas", ["area_id"], name: "index_industry_areas_on_area_id", using: :btree
   add_index "industry_areas", ["industry_id"], name: "index_industry_areas_on_industry_id", using: :btree
 
+  create_table "place_emails", force: :cascade do |t|
+    t.string  "email",    null: false
+    t.integer "place_id"
+  end
+
+  add_index "place_emails", ["place_id"], name: "index_place_emails_on_place_id", using: :btree
+
   create_table "places", force: :cascade do |t|
     t.string   "name",       null: false
     t.string   "address",    null: false
@@ -151,7 +158,6 @@ ActiveRecord::Schema.define(version: 20170205024344) do
     t.float    "latitude"
     t.float    "longitude"
     t.integer  "city_id"
-    t.string   "email"
   end
 
   create_table "states", force: :cascade do |t|

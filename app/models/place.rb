@@ -2,6 +2,7 @@
 #t.string   "address",    null: false
 class Place < ActiveRecord::Base
   has_many :events
+  has_many :place_emails
   belongs_to :city
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	validates :email, 

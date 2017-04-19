@@ -15,7 +15,8 @@ ActiveAdmin.register Place do
         f.input :latitude, :input_html => { :id => 'place_latitude' }
         f.input :longitude, :input_html => { :id => 'place_longitude' }
       end
-      f.input :email
+      
+      #f.input :email, 'data-role'=>'tagsinput'
     end
     f.actions
    end

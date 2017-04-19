@@ -16,7 +16,6 @@ gem 'kaminari'
 gem 'api-pagination'
 gem 'sidekiq'
 gem 'responders', '~> 2.0'
-gem 'bootstrap-tagsinput-rails'
 
 group :development, :test do
   gem 'spring'

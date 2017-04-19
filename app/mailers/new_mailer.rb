@@ -25,7 +25,22 @@ default from: 'info@nwmeeting.com'
     @message = message
     @event = Event.find_by(id: event_id)
     @url = Rails.env.production? ? 'http://nwmeeting.com/' : 'http://localhost:3000/'
-    mail(to: @event.place.email, from: 'info@nwmeeting.com', subject: "Remembering - #{message} #{@event.name}.")
+    if ! @event.nil? &&  ! @event.place.nil? && !@event.place.place_emails.nil? 
+      puts "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      puts to_email(@event.place.place_emails)
+      current_email = to_email(@event.place.place_emails)
+      mail(to: current_email, from: 'info@nwmeeting.com', subject: "Remembering - #{message} #{@event.name}.") if ! current_email.empty?
+    end
+  end
 
+  private
+
+  def to_email(emails)
+    list = []
+    validate = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+    emails.each do | email |
+      list.push(email.email) if !(email.email =~ validate).nil?
+    end
+    list
   end
 end

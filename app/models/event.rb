@@ -17,10 +17,10 @@ class Event < ActiveRecord::Base
   accepts_nested_attributes_for :industry_area_events
 
   has_attached_file :avatar
-  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/, :path => "/var/www/html/networking/images/:class/:attachment/:id_partition/:filename"
 
   has_attached_file :cover
-  validates_attachment_content_type :cover, content_type: /\Aimage\/.*\z/
+  validates_attachment_content_type :cover, content_type: /\Aimage\/.*\z/, :path => "/var/www/html/networking/images/:class/:attachment/:id_partition/:filename"
 
   scope :match_name, ->(text) { where("lower(name) LIKE ? OR lower(description) LIKE ? ", "%#{text.downcase}%", "%#{text.downcase}%") }
   scope :active_events, -> { where("schedule >= ?", Time.zone.now ) }

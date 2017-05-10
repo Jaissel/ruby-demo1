@@ -25,8 +25,15 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :industry_area_users
-  has_many :industries, through: :industry_area_users
+  #has_many :industry_area_users
+  #has_many :industries, through: :industry_area_users
+
+  has_many :industry_users
+  has_many :industries, through: :industry_users
+
+  has_many :area_users
+  has_many :areas, through: :area_users
+    
   has_many :attendances
 
   validates_presence_of :name, :last_name, :email

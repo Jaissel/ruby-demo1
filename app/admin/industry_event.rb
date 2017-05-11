@@ -3,7 +3,7 @@ ActiveAdmin.register IndustryEvent do
   controller do
     skip_before_filter :authenticate_user!
   end
-  permit_params :industry_id, :event_id
+  permit_params :industry_id, :events_id
 
   form do |f|
     f.inputs "Industry User Details" do

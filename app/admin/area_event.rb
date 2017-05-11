@@ -3,7 +3,7 @@ ActiveAdmin.register AreaEvent do
   controller do
     skip_before_filter :authenticate_user!
   end
-  permit_params :event_id, :area_id
+  permit_params :event_id, :areas_id
 
   form do |f|
     f.inputs "Area Event Details" do

@@ -3,7 +3,7 @@ class CreateTableAreaEvent < ActiveRecord::Migration
     create_table :area_events do |t|
 
     t.references :event, index: true
-    t.references :areas, index: true
+    t.references :area, index: true
 
     t.timestamps    	
     end

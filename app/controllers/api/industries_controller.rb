@@ -55,6 +55,21 @@ class Api::IndustriesController < ApplicationController
     end
   end
 
+  def destroy
+    @industry.destroy
+    if @industry.errors.empty?
+      render json: {
+                      success: true,
+                      response: @industry.to_json
+                    }
+    else
+      render json: {
+                      success: false,
+                      info: @industry.errors.to_json
+                    }
+    end
+  end
+
   private
     def set_industry
       @industry = Industry.find(params[:industry_id])

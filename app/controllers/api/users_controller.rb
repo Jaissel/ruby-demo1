@@ -189,10 +189,9 @@ class Api::UsersController < ApplicationController
     #  end#
     #end
 
-    def update_industry_user
-      unless params[:user][:industry_user].nil?
-        
-        params[:user][:industry_user].each do |industry_user_param|
+      def update_industry_user
+        unless params[:user][:industry_user].nil?
+          params[:user][:industry_user].each do |industry_user_param|
           industry_user= IndustryUser.find_or_create_by(industry_id: industry_user_param[:industry_id], area_id: industry_user_param[:user_id])
           if industry_user_param[:destroy]
             industry_user = IndustryUser.find_by(user_id: params[:id], industry_user_id: industry_user.id)
@@ -202,24 +201,22 @@ class Api::UsersController < ApplicationController
           end
         end
       end
-
-      def update_area_user
-      unless params[:user][:area_user].nil?
-        
-        params[:user][:area_user].each do |industry_area_param|
-          area_user = AreaUser.find_or_create_by(user_id: area_user_param[:user_id], area_id: area_user_param[:area_id])
-          if area_user_param[:destroy]
-            area_user = AreaUser.find_by(user_id: params[:id], area_user_id: area_user.id)
-            AreaUser.destroy(area_user.id) unless area_user.nil?
-          else
-            AreaUser.find_or_create_by(user_id: params[:id], area_user_id: area_user.id)
-          end
-        end
       end
 
-        
-    end
-
+      def update_area_user
+        unless params[:user][:area_user].nil?
+          params[:user][:area_user].each do |industry_area_param|
+            area_user = AreaUser.find_or_create_by(user_id: area_user_param[:user_id], area_id: area_user_param[:area_id])
+            if area_user_param[:destroy]
+              area_user = AreaUser.find_by(user_id: params[:id], area_user_id: area_user.id)
+              AreaUser.destroy(area_user.id) unless area_user.nil?
+            else
+              AreaUser.find_or_create_by(user_id: params[:id], area_user_id: area_user.id)
+            end
+          end
+        end        
+      end
+    
     def set_user
       @user = User.find(params[:id].nil? ? params[:user_id] : params[:id])
     end

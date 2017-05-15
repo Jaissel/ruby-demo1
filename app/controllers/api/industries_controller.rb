@@ -10,21 +10,6 @@ class Api::IndustriesController < ApplicationController
                   }
   end
 
-  #def areas
-  #  @areas = @industry.areas.map { |a| areaserializer.new(a).serializable_hash }
-  #  if @industry.errors.empty?
-  #    render json: {
-  #                    success: true,
-  #                    response: @areas
-  #                  }
-  #  else
-  #    render json: {
-  #                    success: false,
-  #                    info: @industry.errors.to_json
-  #                  }
-  #  end
-  #end
-
   def events
     @events = @industry.events.map { |a| eventserializer.new(a).serializable_hash }
     if @industry.errors.empty?

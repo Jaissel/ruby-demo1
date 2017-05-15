@@ -174,21 +174,6 @@ class Api::UsersController < ApplicationController
 
   private
 
-    # def update_industry_areas
-    #   unless params[:user][:industry_areas].nil?
-    #    
-    #    params[:user][:industry_areas].each do |industry_area_param|
-    #      industry_area = IndustryArea.find_or_create_by(industry_id: industry_area_param[:industry_id], area_id: industry_area_param[:area_id])
-    #      if industry_area_param[:destroy]
-    #        industry_area_user = IndustryAreaUser.find_by(user_id: params[:id], industry_area_id: industry_area.id)
-    #        IndustryAreaUser.destroy(industry_area_user.id) unless industry_area_user.nil?
-    #      else
-    #       IndustryAreaUser.find_or_create_by(user_id: params[:id], industry_area_id: industry_area.id)
-    #      end
-    #    end
-    #  end#
-    #end
-
       def update_industry_user
         unless params[:user][:industry_user].nil?
           params[:user][:industry_user].each do |industry_user_param|

@@ -3,17 +3,10 @@ class UserSerializer < ActiveModel::Serializer
 
   def industries
     @user_industries = []
-    object.industry_area_users.map{|i| i.industry_area.industry_id}.uniq{ |id| id }.each do |industry_id|
+    object.industry_users.map{|i| i.industry_user.industry_id}.uniq{ |id| id }.each do |industry_id|
       @user_industries << IndustrySerializer.new(Industry.find(industry_id)).serializable_hash
     end
     @user_industries
-  end
+  end 
 
-  def areas
-    @user_areas = []
-    object.industry_area_users.map{|i| i.industry_area.area_id}.uniq{ |id| id }.each do |area_id|
-      @user_areas << AreaSerializer.new(Area.find(area_id)).serializable_hash
-    end
-    @user_areas
-  end
 end

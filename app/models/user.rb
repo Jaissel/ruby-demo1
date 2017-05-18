@@ -25,9 +25,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  #has_many :industry_area_users
-  #has_many :industries, through: :industry_area_users
-
   has_many :industry_users
   has_many :industries, through: :industry_users
 
@@ -38,7 +35,11 @@ class User < ActiveRecord::Base
 
   validates_presence_of :name, :last_name, :email
 
+  has_attached_file :avatar
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+  validates_attachment_content_type :avatar, content_type:  /^image\/(jpg|jpeg|pjpeg|png|x-png)$/, :message => 'file type is not allowed (only jpeg/png images)'
 
+  attr_accessor :avatar
 
   def self.find_for_linkedin_sign_up(data)
     identity = Identity.find_for_params(data)

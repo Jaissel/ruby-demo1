@@ -1,6 +1,7 @@
 class Api::UsersController < ApplicationController
   before_action :set_user, only: [:destroy, :show, :update, :attendances, :attending, :not_attending]
-  before_action :update_industry_areas, only: [:update]
+  before_action :update_industry_user, only: [:update]
+  before_action :update_area_user, only: [:update]
   skip_before_filter :authenticate_user!, only: [:new_email, :create, :log_in, :create_reset_password]
   before_action :validate_email, only: [:create, :log_in]
   before_filter :find_user_by_email_reset, only: [:create_reset_password]

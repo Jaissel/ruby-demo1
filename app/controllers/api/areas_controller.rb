@@ -3,12 +3,12 @@ class Api::AreasController < ApplicationController
 
   def index
 
-    @areas = IndustryArea.all.map { |i| IndustryAreaSerializer.new(i).serializable_hash }
+    @areas = Area.all.map { |i| AreaSerializer.new(i).serializable_hash }
     render json: {
                     success: true,
                     response: @areas
                   }
-  
+  end
 
   def events
     @events = @areas.events.map { |a| eventserializer.new(a).serializable_hash }
@@ -41,3 +41,4 @@ class Api::AreasController < ApplicationController
   end
   
 end
+

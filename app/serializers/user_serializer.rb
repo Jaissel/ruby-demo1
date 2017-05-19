@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :name,:last_name, :profile, :avatar, :profile, :location, :company, :position, :phone, :email,
+  attributes :id, :name,:last_name, :profile, :avatar, :profile, :location, :company, :position, :phone, :email, :authentication_token,
 
   def avatar
     if object.image.url == "/images/original/missing.png"

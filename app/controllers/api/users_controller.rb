@@ -141,7 +141,7 @@ class Api::UsersController < ApplicationController
         sign_in(user)
         render json: {
                       success: true,
-                      response: user,
+                      response: UserSerializer.new(user).serializable_hash,
                       status: 200
                     }
       else

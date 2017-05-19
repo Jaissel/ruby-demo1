@@ -31,6 +31,14 @@ class User < ActiveRecord::Base
 
   validates_presence_of :name, :last_name, :email
 
+  has_attached_file :image
+  validates_attachment_content_type :image, content_type: /\Aimage/
+  validates_attachment_file_name :image, matches: [/png\z/, /jpe?g\z/]
+
+
+
+
+
 
 
   def self.find_for_linkedin_sign_up(data)

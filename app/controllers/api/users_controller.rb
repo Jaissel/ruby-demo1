@@ -243,6 +243,6 @@ class Api::UsersController < ApplicationController
   def user_params_update
     params.require(:user).permit(:email, :password, 
       :name, :last_name, :avatar, :profile, 
-      :phone, :company, :position, :location, :password)
+      :phone, :company, :position, :location, :password, :image)
   end
 end

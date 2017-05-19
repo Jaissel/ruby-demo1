@@ -5,7 +5,7 @@ class AreaUserSerializer < ActiveModel::Serializer
     UserSerializer.new(object.user).serializable_hash
   end
 
-  def event
+  def area
     AreaSerializer.new(object.area, current_user: instance_options[:current_user]).serializable_hash
   end
 end

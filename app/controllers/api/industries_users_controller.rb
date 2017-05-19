@@ -3,7 +3,7 @@ class Api::IndustriesUsersController < ApplicationController
 
   def index
 
-    @industriesusers = IndustriesUsers.all.map { |i| IndustriesUsersSerializer.new(i).serializable_hash }
+    @industriesusers = IndustryUser.all.map { |i| IndustryUserSerializer.new(i).serializable_hash }
     render json: {
                     success: true,
                     response: @industriesusers

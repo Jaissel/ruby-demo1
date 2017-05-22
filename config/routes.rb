@@ -24,7 +24,9 @@ Rails.application.routes.draw do
     end
     resources :areas, only: [:index]
     resources :areas_users, only: [:index]
+    resources :areas_events, only: [:index]
     resources :industries_users, only: [:index]
+    resources :industries_events, only: [:index]
     resources :events, only: [:index, :show]
     resources :attendances, only: [:destroy, :create]
     scope :search, :controller => 'search' do

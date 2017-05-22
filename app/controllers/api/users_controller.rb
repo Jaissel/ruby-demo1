@@ -191,7 +191,7 @@ class Api::UsersController < ApplicationController
 
       def update_area_user
         unless params[:user][:area_user].nil?
-          params[:user][:area_user].each do |industry_area_param|
+          params[:user][:area_user].each do |area_user_param|
             area_user = AreaUser.find_or_create_by(user_id: area_user_param[:user_id], area_id: area_user_param[:area_id])
             if area_user_param[:destroy]
               area_user = AreaUser.find_by(user_id: params[:id], area_user_id: area_user.id)

@@ -143,7 +143,7 @@ class Api::UsersController < ApplicationController
         sign_in(user)
         render json: {
                       success: true,
-                      response: user,
+                      response: UserSerializer.new(user).serializable_hash,
                       status: 200
                     }
       else
@@ -255,6 +255,6 @@ class Api::UsersController < ApplicationController
   def user_params_update
     params.require(:user).permit(:email, :password, 
       :name, :last_name, :avatar, :profile, 
-      :phone, :company, :position, :location, :password, :status)
+      :phone, :company, :position, :location, :password, :image, :status)
   end
 end

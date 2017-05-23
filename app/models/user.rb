@@ -35,13 +35,10 @@ class User < ActiveRecord::Base
 
   validates_presence_of :name, :last_name, :email
 
-  #has_attached_file :avatar
+  has_attached_file :image
+  validates_attachment_content_type :image, content_type: /\Aimage/
+  validates_attachment_file_name :image, matches: [/png\z/, /jpe?g\z/]
 
-  #validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
-  
-  #validates_attachment_content_type :avatar, content_type:  /^image\/(jpg|jpeg|pjpeg|png|x-png)$/, :message => 'file type is not allowed (only jpeg/png images)'
-
-  #attr_accessor :avatar
 
   def self.find_for_linkedin_sign_up(data)
     identity = Identity.find_for_params(data)

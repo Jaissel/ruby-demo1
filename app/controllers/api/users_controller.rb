@@ -37,7 +37,8 @@ class Api::UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
+    #@user.destroy
+    @user.update_attributes(:status=>"inactive")
     if @user.errors.empty?
       render json: {
                       success: true,
@@ -254,6 +255,6 @@ class Api::UsersController < ApplicationController
   def user_params_update
     params.require(:user).permit(:email, :password, 
       :name, :last_name, :avatar, :profile, 
-      :phone, :company, :position, :location, :password)
+      :phone, :company, :position, :location, :password, :status)
   end
 end

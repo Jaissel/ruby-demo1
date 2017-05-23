@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   namespace :api do
     post 'users/sign_in' => 'users#log_in'
     post 'users/reset_password' => "users#create_reset_password"
-    resources :users, only: [:show, :update, :create] do
+    resources :users, only: [:show, :update, :create, :destroy] do
       get :attendances
       get :attending
       get :not_attending

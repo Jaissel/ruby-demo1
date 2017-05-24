@@ -73,9 +73,14 @@ class User < ActiveRecord::Base
     user
   end
 
-
   def self.find_user_sign_up(data)
-    user = User.new(email: data[:email], name: data[:name], last_name: data[:last_name], password: data[:password], password_confirmation: data[:password_confirmation])
+    user = User.new(email: data[:email], 
+      name: data[:name], 
+      last_name: data[:last_name], 
+      password: data[:password], 
+      password_confirmation: data[:password_confirmation],
+      position: data[:position],
+      company: data[:company])
   end
 
    def send_password_reset(params)

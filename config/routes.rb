@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   namespace :api do
     post 'users/sign_in' => 'users#log_in'
     post 'users/reset_password' => "users#create_reset_password"
-    resources :users, only: [:show, :update, :create] do
+    resources :users, only: [:show, :update, :create, :destroy] do
       get :attendances
       get :attending
       get :not_attending
@@ -23,7 +23,10 @@ Rails.application.routes.draw do
       get :areas
     end
     resources :areas, only: [:index]
-    resources :industry_area_users, only: [:create]
+    resources :areas_users, only: [:index]
+    resources :areas_events, only: [:index]
+    resources :industries_users, only: [:index]
+    resources :industries_events, only: [:index]
     resources :events, only: [:index, :show]
     resources :attendances, only: [:destroy, :create]
     scope :search, :controller => 'search' do

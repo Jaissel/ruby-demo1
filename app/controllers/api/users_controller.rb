@@ -1,6 +1,7 @@
 class Api::UsersController < ApplicationController
   before_action :set_user, only: [:destroy, :show, :update, :attendances, :attending, :not_attending]
-  before_action :update_industry_areas, only: [:update]
+  before_action :update_industry_user, only: [:update]
+  before_action :update_area_user, only: [:update]
   skip_before_filter :authenticate_user!, only: [:new_email, :create, :log_in, :create_reset_password]
   before_action :validate_email, only: [:create, :log_in]
   before_filter :find_user_by_email_reset, only: [:create_reset_password]
@@ -36,7 +37,8 @@ class Api::UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
+    #@user.destroy
+    @user.update_attributes(:status=>"inactive")
     if @user.errors.empty?
       render json: {
                       success: true,
@@ -174,24 +176,34 @@ class Api::UsersController < ApplicationController
 
   private
 
-    def update_industry_areas
-      unless params[:user][:industry_areas].nil?
-        
-        params[:user][:industry_areas].each do |industry_area_param|
-          industry_area = IndustryArea.find_or_create_by(industry_id: industry_area_param[:industry_id], area_id: industry_area_param[:area_id])
-          if industry_area_param[:destroy]
-            industry_area_user = IndustryAreaUser.find_by(user_id: params[:id], industry_area_id: industry_area.id)
-            IndustryAreaUser.destroy(industry_area_user.id) unless industry_area_user.nil?
+      def update_industry_user
+        unless params[:user][:industry_user].nil?
+          params[:user][:industry_user].each do |industry_user_param|
+          industry_user= IndustryUser.find_or_create_by(industry_id: industry_user_param[:industry_id], area_id: industry_user_param[:user_id])
+          if industry_user_param[:destroy]
+            industry_user = IndustryUser.find_by(user_id: params[:id], industry_user_id: industry_user.id)
+            IndustryUser.destroy(industry_user.id) unless industry_user.nil?
           else
-            IndustryAreaUser.find_or_create_by(user_id: params[:id], industry_area_id: industry_area.id)
+            IndustryUser.find_or_create_by(user_id: params[:id], industry_user_id: industry_user.id)
           end
         end
-        
+      end
       end
 
-        
-    end
-
+      def update_area_user
+        unless params[:user][:area_user].nil?
+          params[:user][:area_user].each do |area_user_param|
+            area_user = AreaUser.find_or_create_by(user_id: area_user_param[:user_id], area_id: area_user_param[:area_id])
+            if area_user_param[:destroy]
+              area_user = AreaUser.find_by(user_id: params[:id], area_user_id: area_user.id)
+              AreaUser.destroy(area_user.id) unless area_user.nil?
+            else
+              AreaUser.find_or_create_by(user_id: params[:id], area_user_id: area_user.id)
+            end
+          end
+        end        
+      end
+    
     def set_user
       @user = User.find(params[:id].nil? ? params[:user_id] : params[:id])
     end
@@ -243,6 +255,6 @@ class Api::UsersController < ApplicationController
   def user_params_update
     params.require(:user).permit(:email, :password, 
       :name, :last_name, :avatar, :profile, 
-      :phone, :company, :position, :location, :password, :image)
+      :phone, :company, :position, :location, :password, :image, :status)
   end
 end

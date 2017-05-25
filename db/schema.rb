@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170409024344) do
+ActiveRecord::Schema.define(version: 20170523151432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,26 @@ ActiveRecord::Schema.define(version: 20170409024344) do
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "area_events", force: :cascade do |t|
+    t.integer  "event_id"
+    t.integer  "area_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "area_events", ["area_id"], name: "index_area_events_on_area_id", using: :btree
+  add_index "area_events", ["event_id"], name: "index_area_events_on_event_id", using: :btree
+
+  create_table "area_users", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "area_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "area_users", ["area_id"], name: "index_area_users_on_area_id", using: :btree
+  add_index "area_users", ["user_id"], name: "index_area_users_on_user_id", using: :btree
 
   create_table "areas", force: :cascade do |t|
     t.string   "name",       null: false
@@ -143,6 +163,26 @@ ActiveRecord::Schema.define(version: 20170409024344) do
   add_index "industry_areas", ["area_id"], name: "index_industry_areas_on_area_id", using: :btree
   add_index "industry_areas", ["industry_id"], name: "index_industry_areas_on_industry_id", using: :btree
 
+  create_table "industry_events", force: :cascade do |t|
+    t.integer  "event_id"
+    t.integer  "industry_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "industry_events", ["event_id"], name: "index_industry_events_on_event_id", using: :btree
+  add_index "industry_events", ["industry_id"], name: "index_industry_events_on_industry_id", using: :btree
+
+  create_table "industry_users", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "industry_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "industry_users", ["industry_id"], name: "index_industry_users_on_industry_id", using: :btree
+  add_index "industry_users", ["user_id"], name: "index_industry_users_on_user_id", using: :btree
+
   create_table "place_emails", force: :cascade do |t|
     t.string  "email",    null: false
     t.integer "place_id"
@@ -168,27 +208,32 @@ ActiveRecord::Schema.define(version: 20170409024344) do
   add_index "states", ["country_id"], name: "index_states_on_country_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                             default: "", null: false
-    t.string   "encrypted_password",                default: "", null: false
-    t.string   "name",                                           null: false
-    t.string   "last_name",                                      null: false
+    t.string   "email",                             default: "",       null: false
+    t.string   "encrypted_password",                default: "",       null: false
+    t.string   "name",                                                 null: false
+    t.string   "last_name",                                            null: false
     t.string   "avatar"
     t.string   "phone"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                     default: 0,  null: false
+    t.integer  "sign_in_count",                     default: 0,        null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
     t.string   "authentication_token",   limit: 30
     t.string   "location"
     t.string   "company"
     t.string   "position"
     t.string   "profile"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.string   "status",                            default: "active"
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree

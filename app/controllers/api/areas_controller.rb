@@ -39,6 +39,27 @@ class Api::AreasController < ApplicationController
                     }
     end
   end
+   def create
+    @areas = Area.new(area_params)
+    if @areas.save
+       render json: {
+                    success: true,
+                    response: @areas
+                  }
+      else
+        render json: {
+                        success: false,
+                        info:@areas.errors.to_json
+                      }
+      end  
+  end
+
+
+  private
+    def area_params
+    params.permit(:name)
+  end
+  
   
 end
 

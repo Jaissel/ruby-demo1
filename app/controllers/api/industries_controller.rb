@@ -55,8 +55,27 @@ class Api::IndustriesController < ApplicationController
     end
   end
 
+def create
+    @industries = Industry.new(industry_params)
+    if @industries.save
+       render json: {
+                    success: true,
+                    response: @industries
+                  }
+      else
+        render json: {
+                        success: false,
+                        info:@industries.errors.to_json
+                      }
+      end  
+  end
+
   private
     def set_industry
       @industry = Industry.find(params[:industry_id])
+    end
+
+     def industry_params
+      params.permit(:name)
     end
 end

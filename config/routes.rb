@@ -19,10 +19,10 @@ Rails.application.routes.draw do
       get :attending
       get :not_attending
     end
-    resources :industries, only: [:index] do
+    resources :industries, only: [:index,:create] do
       get :areas
     end
-    resources :areas, only: [:index]
+    resources :areas, only: [:index,:create]
     resources :areas_users, only: [:index]
     resources :areas_events, only: [:index]
     resources :industries_users, only: [:index]

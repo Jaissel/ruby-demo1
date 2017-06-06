@@ -4,7 +4,7 @@ ActiveAdmin.register Place do
     skip_before_filter :authenticate_user!
   end
 
-  permit_params :name, :address, :latitude, :longitude, :city_id, :email
+  permit_params :name, :address, :latitude, :longitude, :city_id
 
   form do |f|
     f.inputs "Event Details" do
@@ -28,7 +28,7 @@ ActiveAdmin.register Place do
       row :city
       row :latitude
       row :longitude
-      row :email
+      #row :email
     end
    end
 

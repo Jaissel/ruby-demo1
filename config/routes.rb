@@ -23,10 +23,10 @@ Rails.application.routes.draw do
       get :areas
     end
     resources :areas, only: [:index,:create]
-    resources :areas_users, only: [:index]
-    resources :areas_events, only: [:index]
-    resources :industries_users, only: [:index]
-    resources :industries_events, only: [:index]
+    resources :areas_users, only: [:index,:create]
+    resources :areas_events, only: [:index,:create]
+    resources :industries_users, only: [:index,:create]
+    resources :industries_events, only: [:index,:create]
     resources :events, only: [:index, :show]
     resources :attendances, only: [:destroy, :create]
     scope :search, :controller => 'search' do

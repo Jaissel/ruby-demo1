@@ -25,12 +25,19 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :industry_area_users
-  has_many :industries, through: :industry_area_users
+  has_many :industry_users
+  has_many :industries, through: :industry_users
+
+  has_many :area_users
+  has_many :areas, through: :area_users
+    
   has_many :attendances
 
   validates_presence_of :name, :last_name, :email
 
+  has_attached_file :image
+  validates_attachment_content_type :image, content_type: /\Aimage/
+  validates_attachment_file_name :image, matches: [/png\z/, /jpe?g\z/]
 
 
   def self.find_for_linkedin_sign_up(data)
@@ -66,9 +73,14 @@ class User < ActiveRecord::Base
     user
   end
 
-
   def self.find_user_sign_up(data)
-    user = User.new(email: data[:email], name: data[:name], last_name: data[:last_name], password: data[:password], password_confirmation: data[:password_confirmation])
+    user = User.new(email: data[:email], 
+      name: data[:name], 
+      last_name: data[:last_name], 
+      password: data[:password], 
+      password_confirmation: data[:password_confirmation],
+      position: data[:position],
+      company: data[:company])
   end
 
    def send_password_reset(params)

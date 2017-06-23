@@ -11,10 +11,19 @@ class Event < ActiveRecord::Base
   belongs_to :place
   belongs_to :admin_user
   has_many :attendances
-  has_many :industry_area_events
-  has_many :industry_areas, through: :industry_area_events
+  
+  #has_many :industry_area_events
+  #has_many :industry_areas, through: :industry_area_events
+  
+  has_many :industry_events
+  has_many :industries, through: :industry_events
+
+  has_many :area_events
+  has_many :areas, through: :area_events
+
   validates_presence_of :name, :description, :schedule, :avatar, :cover, :capacity
-  accepts_nested_attributes_for :industry_area_events
+  accepts_nested_attributes_for :industry_events, :area_events
+  #accepts_nested_attributes_for :industry_area_events
 
   has_attached_file :avatar
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/, :path => "/var/www/html/networking/images/:class/:attachment/:id_partition/:filename"
@@ -25,7 +34,7 @@ class Event < ActiveRecord::Base
   scope :match_name, ->(text) { where("lower(name) LIKE ? OR lower(description) LIKE ? ", "%#{text.downcase}%", "%#{text.downcase}%") }
   scope :active_events, -> { where("schedule >= ?", Time.zone.now ) }
 
-  after_save :sendEmail
+  #after_save :sendEmail
 
   private
     def sendEmail

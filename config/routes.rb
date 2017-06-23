@@ -14,16 +14,19 @@ Rails.application.routes.draw do
   namespace :api do
     post 'users/sign_in' => 'users#log_in'
     post 'users/reset_password' => "users#create_reset_password"
-    resources :users, only: [:show, :update, :create] do
+    resources :users, only: [:show, :update, :create, :destroy] do
       get :attendances
       get :attending
       get :not_attending
     end
-    resources :industries, only: [:index] do
+    resources :industries, only: [:index,:create] do
       get :areas
     end
-    resources :areas, only: [:index]
-    resources :industry_area_users, only: [:create]
+    resources :areas, only: [:index,:create]
+    resources :areas_users, only: [:index,:create]
+    resources :areas_events, only: [:index,:create]
+    resources :industries_users, only: [:index,:create]
+    resources :industries_events, only: [:index,:create]
     resources :events, only: [:index, :show]
     resources :attendances, only: [:destroy, :create]
     scope :search, :controller => 'search' do

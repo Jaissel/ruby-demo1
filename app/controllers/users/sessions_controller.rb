@@ -8,7 +8,7 @@ class Users::SessionsController < Devise::SessionsController
       sign_in(resource_name, resource)
       render json: {
                       success: true,
-                      response: @user
+                      response: UserSerializer.new(@user).serializable_hash
                     }
     else
       render json: {

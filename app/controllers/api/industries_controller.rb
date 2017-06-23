@@ -1,5 +1,5 @@
 class Api::IndustriesController < ApplicationController
-  before_action :set_industry, only: [:areas]
+  before_action :set_industry, only: [:users]
   respond_to :json
 
   def index
@@ -10,12 +10,12 @@ class Api::IndustriesController < ApplicationController
                   }
   end
 
-  def areas
-    @areas = @industry.areas.map { |a| AreaSerializer.new(a).serializable_hash }
+  def events
+    @events = @industry.events.map { |a| eventserializer.new(a).serializable_hash }
     if @industry.errors.empty?
       render json: {
                       success: true,
-                      response: @areas
+                      response: @events
                     }
     else
       render json: {
@@ -25,8 +25,57 @@ class Api::IndustriesController < ApplicationController
     end
   end
 
+  def users
+    @users = @industry.users.map { |a| userserializer.new(a).serializable_hash }
+    if @industry.errors.empty?
+      render json: {
+                      success: true,
+                      response: @users
+                    }
+    else
+      render json: {
+                      success: false,
+                      info: @industry.errors.to_json
+                    }
+    end
+  end
+
+  def destroy
+    @industry.destroy
+    if @industry.errors.empty?
+      render json: {
+                      success: true,
+                      response: @industry.to_json
+                    }
+    else
+      render json: {
+                      success: false,
+                      info: @industry.errors.to_json
+                    }
+    end
+  end
+
+def create
+    @industries = Industry.new(industry_params)
+    if @industries.save
+       render json: {
+                    success: true,
+                    response: @industries
+                  }
+      else
+        render json: {
+                        success: false,
+                        info:@industries.errors.to_json
+                      }
+      end  
+  end
+
   private
     def set_industry
       @industry = Industry.find(params[:industry_id])
+    end
+
+     def industry_params
+      params.permit(:name)
     end
 end

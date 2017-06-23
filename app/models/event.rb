@@ -34,7 +34,7 @@ class Event < ActiveRecord::Base
   scope :match_name, ->(text) { where("lower(name) LIKE ? OR lower(description) LIKE ? ", "%#{text.downcase}%", "%#{text.downcase}%") }
   scope :active_events, -> { where("schedule >= ?", Time.zone.now ) }
 
-  #after_save :sendEmail
+  after_save :sendEmail
 
   private
     def sendEmail
